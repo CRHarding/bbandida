@@ -19,12 +19,14 @@
     "url": "https://github.com/CRHarding/bbandida/issues"
   },
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^5.0.1",
     "express": "~4.16.0",
     "morgan": "~1.9.0",
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.17.3",
+    "npm": "^6.0.0"
   },
   "homepage": "https://github.com/CRHarding/bbandida#readme"
 }

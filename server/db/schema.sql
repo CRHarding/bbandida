@@ -8,7 +8,6 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) UNIQUE,
   password VARCHAR(255),
-  salt VARCHAR(255),
   date_created TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
@@ -24,7 +23,6 @@ CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   image_ids integer ARRAY,
   description VARCHAR(255),
-  date Date,
   contributors integer REFERENCES contributor ON UPDATE CASCADE ON DELETE CASCADE,
   price float default 0,
   number_sold integer default 0,
