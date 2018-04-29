@@ -1,0 +1,29 @@
+{
+  "name": "bbandida",
+  "version": "1.0.0",
+  "description": "Webiste for BBandIda",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "debug": "nodemon --inspect"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CRHarding/bbandida.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CRHarding/bbandida/issues"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "morgan": "~1.9.0",
+    "nodemon": "^1.17.3"
+  },
+  "homepage": "https://github.com/CRHarding/bbandida#readme"
+}
