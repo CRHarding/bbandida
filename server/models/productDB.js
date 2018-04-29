@@ -8,16 +8,17 @@ module.exports = {
   addProduct(product) {
     return productDB.one(
       `INSERT INTO products
-                            (image_ids, description, contributors, price, number_sold)
+                            (image_ids, description, contributors, price)
                           VALUES
                             ($[image_ids], $[description],
-                            $[contributors], $[price], $[number_sold])
+                            $[contributors], $[price])
                             RETURNING *`,
       product,
     );
   },
 
   editProduct(product) {
+    console.log(product);
     return productDB.one(
       `UPDATE products
         SET image_ids = $[image_ids], description = $[description], price=$[price], number_sold = $[number_sold]
@@ -27,6 +28,7 @@ module.exports = {
   },
 
   deleteProduct(product) {
-    return productDB.none(`DELETE FROM products WHERE id = $1`, product.id);
+    console.log(product);
+    return productDB.none(`DELETE FROM products WHERE id = $1`, product);
   },
 };
