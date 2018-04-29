@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 const productsRouter = require('./routes/products');
 const usersRouter = require('./routes/users');
+const contributorRouter = require('./routes/contributors');
 
 const app = express();
 
@@ -19,7 +20,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/products', productsRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/contributors', contributorRouter);
 
 app.get('/*', (req, res) => {
   res.render('MADE IT!');

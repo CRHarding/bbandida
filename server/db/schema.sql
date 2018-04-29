@@ -23,7 +23,7 @@ CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   image_ids integer ARRAY,
   description VARCHAR(255),
-  contributors integer REFERENCES contributor ON UPDATE CASCADE ON DELETE CASCADE,
+  contributors integer ARRAY,
   price float default 0,
   number_sold integer default 0,
   date_created TIMESTAMP NOT NULL DEFAULT NOW()
