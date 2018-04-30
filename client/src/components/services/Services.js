@@ -35,7 +35,7 @@ const Services = {
 
 	deleteBlog(blog) {
 
-	},
+	}
 }
 
 export default Services

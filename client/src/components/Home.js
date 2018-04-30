@@ -15,21 +15,20 @@ export default class home extends Component {
 	}
 
 	buttonClick() {
-		console.log('Clicked button')
 		this.setState({
-			show: true
+			show: !this.state.show
 		})
 	}
 
 	render() {
-		console.log(this.state)
 		return (
 			<div>
 				<Header />
-				<h1>Main Body</h1>
-				<small> line break </small>
+				<h1>BB and IDA</h1>
+
+		{/* when user clicks product a single view will show on same page */}
 				{ this.state.show ? <Product /> : '' }
-				<small> line break </small>
+				
 				<Products />
 				<button onClick={this.buttonClick}>test</button>
 				
