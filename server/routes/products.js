@@ -21,9 +21,10 @@ router.post('/', (req, res) => {
     contributors: req.body.contributors,
     price: req.body.price,
   };
+  console.log(productObject);
   if (productObject.contributors.length > 0) {
     productObject.contributors.map(contributor => {
-      contributors
+      contributorController
         .getOneContributor(contributor)
         .then(contributor => {
           return contributor.id;
