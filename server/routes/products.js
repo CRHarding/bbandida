@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
   };
   if (productObject.contributors.length > 0) {
     productObject.contributors.map(contributor => {
-      contributors
+      contributorController
         .getOneContributor(contributor)
         .then(contributor => {
           return contributor.id;
