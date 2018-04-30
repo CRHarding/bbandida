@@ -22,17 +22,51 @@ GET ALL PRODUCTS
 
 DELETE
   POST localhost:3001/api/products/delete/:id
+  RESPONSE ---> true if success or false if failuer
 
 EDIT
   POST localhost:3001/api/products/edit
   ******the product information is sent in
   ******via the form, have a hidden field that
   ******contains the product id
+  RESPONSE --->
+  {
+    "product":
+      {"id":2,
+      "image_ids":[
+        1,
+        2,
+        3
+      ],
+      "description": "Made from the finest fabrics in the U!S!A!",
+      "contributors":[],
+      "price":4,
+      "number_sold":null,
+      "date_created":"2018-04-29T22:21:25.891Z"
+    }
+  }
 
 CREATE PRODUCT
   POST localhost:3001/api/products
   ******ALL CHECKS ARE IN FOR MISSING CONTRIBUTORS /
   ******MISSING IMAGES
+  {
+    "product":
+      {
+        "id":3,
+        "image_ids":[
+          1,
+          2
+        ],
+        "description": "This is a dress. A pretty dress",
+        "contributors": [
+          4
+        ],
+        "price": 400,
+        "number_sold": 0,
+        "date_created": "2018-04-30T14:58:54.751Z"
+      }
+    }
 
 
 -----CONTRIBUTORS-----
