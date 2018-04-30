@@ -2,17 +2,32 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 const contributorController = require('../controllers/contributorController');
+import multer from 'multer';
+import cloudinary from 'cloudinary';
+import fileUploadMiddleware from '../middleware/fileUploadMiddleware';
+
+cloudinary.config({
+  cloud_name: 'process.ENV.CLOUD_NAME',
+  api_key: 'process.ENV.API_KEY',
+  api_secret: 'proces.ENV.API_SECRET',
+});
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 router.get('/', (req, res) => {
   productController
     .getAllProducts()
     .then(products => {
-      res.json({ products: products });
+
+      res.json({ products: products, images: images });
     })
     .catch(err => {
       res.status(400).json({ errors: err });
     });
 });
+
+router.post('/file', upload.single('file'), fileUploadMiddleware);
 
 router.post('/', (req, res) => {
   const productObject = {
