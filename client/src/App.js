@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Admin from './components/Admin';
+import About from './components/About';
+import Blogs from './components/Blogs';
+import Contact from './components/Contact';
+import Cart from './components/Cart';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">BB and IDA</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+        <div>
+          <Route exact path = "/" component = {Home} />
+          <Route exact path = "/admin" component = {Admin} />
+          <Route path = "/about" component = {About} />
+          <Route path = "/contact" component = {Contact} />
+          <Route path = "/cart" component = {Cart} />
+          <Route path = "/blogs" component = {Blogs} />
+        </div>
+      </Router>
     );
   }
 }
-
-export default App;

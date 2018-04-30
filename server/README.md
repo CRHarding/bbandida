@@ -1,2 +1,4 @@
 # bbandida
-Webiste for BBandIda
+
+Express/Node back-end
+postgresql
