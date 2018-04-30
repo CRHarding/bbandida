@@ -1,0 +1,55 @@
+-----PRODUCTS-----
+GET ALL PRODUCTS
+  GET localhost:3001/api/products
+  RESPONSE -->
+  {
+    "products": [
+        {
+            "id": 2,
+            "image_ids": [
+                1,
+                2,
+                3
+            ],
+            "description": "This is the worst jacket ever made!!!",
+            "contributors": [],
+            "price": 4,
+            "number_sold": null,
+            "date_created": "2018-04-29T22:21:25.891Z"
+        }
+    ]
+}
+
+DELETE
+  POST localhost:3001/api/products/delete/:id
+
+EDIT
+  POST localhost:3001/api/products/edit
+  ******the product information is sent in
+  ******via the form, have a hidden field that
+  ******contains the product id
+
+CREATE PRODUCT
+  POST localhost:3001/api/products
+  ******ALL CHECKS ARE IN FOR MISSING CONTRIBUTORS /
+  ******MISSING IMAGES
+
+
+-----CONTRIBUTORS-----
+GET ALL CONTRIBUTORS
+  GET localhost:3001/api/contributors
+  RESPONSE -->
+  {"contributors":
+    [
+      {
+        "id":1,"name":"Casey R Harding", "role":"Photographer", "link":"www.caseyharding.com", "date_created":"2018-04-29T21:46:10.967Z"
+      },
+      {
+      "id":3,
+      "name":"Tom Choe",
+      "role":"Beat Box",
+      "link":"https://tomChoe.com",
+      "date_created":"2018-04-29T21:46:10.968Z"
+      }
+    ]
+  }
