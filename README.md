@@ -1,11 +1,9 @@
-## bbandida
+# bbandida
 BB and Ida
 Clothing retailer, Photography Services
 
-## Technologies
+# Technologies
 
-# React 
-# Express/Node
-# Cart/Checkout/Payment processing
-
-## 
+### React 
+### Express/Node
+### Cart/Checkout/Payment processing
