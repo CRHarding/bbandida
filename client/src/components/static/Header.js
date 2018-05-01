@@ -7,7 +7,7 @@ const Header = () => {
 		<div class="header">
 			<nav className="white">
 				<div className="nav-wrapper">
-					<a href="/" class="brand-logo center"><img src={ logo } height="96" width="80" /></a>
+					<a href="/" class="brand-logo center"><img src={ logo } height="96" width="80" alt="logo" /></a>
 					<ul id="nav-mobile" className="left hide-on-med-and-down">
 						<li><Link to = "/about" className="blue-text">
 							About

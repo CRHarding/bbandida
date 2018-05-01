@@ -6,7 +6,6 @@ const Services = {
 	},
 
 	getProducts() {
-		console.log('This is services for getProducts');
 		return axios({
 			method: "GET",
 			url: "/api/products"
@@ -22,7 +21,6 @@ const Services = {
 	},
 
 	getContribs() {
-		console.log('This is services for getContribs');
 		return axios({
 			method: "GET",
 			url: "/api/contributors"
