@@ -7,41 +7,35 @@ class gallery extends Component {
     super(props);
     this.state = {
       gallery: [],
-      uploaded: false,
-      url: null
     };
+    this.renderSingleAdded = this.renderSingleAdded.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps, prevState);
-    if (nextProps.url !== prevState.url) {
-      return nextProps.url;
-    }
   }
 
   componentDidMount() {
     axios
       .get('https://res.cloudinary.com/bbandida/image/list/photos.json')
       .then(response => {
-        console.log(response.data.resources);
-        this.setState({ gallery: response.data.resources });
+        this.setState({
+          gallery: response.data.resources,
+        });
       })
       .catch(err => console.log(err));
   }
 
   uploadWidget() {
-    console.log(this);
-    let url;
+    let _this = this;
     window.cloudinary.openUploadWidget(
       { cloud_name: 'bbandida', upload_preset: 'q0zswxx7', tags: ['photos'] },
       function(error, result) {
-        console.log(result);
-        url = result[0].public_id;
+        _this.setState({ gallery: _this.state.gallery.concat(result) });
       },
     );
-    this.setState({ uploaded: true, url: url });
-    console.log(this.state);
+  }
+
+  renderSingleAdded() {
+    console.log(this.state.url);
+    return <Image publicId={this.state.url} />;
   }
 
   render() {
@@ -82,7 +76,7 @@ class gallery extends Component {
                 </div>
               );
             })}
-            {this.state.loaded ? <Image publicId={this.state.url}></Image> : ''}
+            {this.state.loaded ? this.renderSingleAdded() : ''}
           </CloudinaryContext>
           <div className="clearfix" />
         </div>
