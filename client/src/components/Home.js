@@ -11,13 +11,6 @@ export default class home extends Component {
 			dataLoaded: false,
 
 		}
-		this.buttonClick = this.buttonClick.bind(this)
-	}
-
-	buttonClick() {
-		this.setState({
-			show: !this.state.show
-		})
 	}
 
 	render() {
@@ -25,13 +18,7 @@ export default class home extends Component {
 			<div>
 				<Header />
 				<h1>BB and IDA</h1>
-
-		{/* when user clicks product a single view will show on same page */}
-				{ this.state.show ? <Product /> : '' }
-				
 				<Products />
-				<button onClick={this.buttonClick}>test</button>
-				
 			</div>
 		)
 	}
