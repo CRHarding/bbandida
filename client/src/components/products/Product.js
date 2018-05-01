@@ -1,6 +1,8 @@
 import React from 'react';
+import ProductInfo from './Productinfo';
 
 const Product = (props) => {
+	let click = false;
 	console.log('PRODUCT ->', props)
 	let contributors = props.contributors.map(contributor => {
 		return props.contribs.filter(contrib => contrib.id === contributor)
