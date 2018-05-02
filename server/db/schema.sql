@@ -1,7 +1,7 @@
 \c bbandida
 
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS products cascade;
+DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS contributor;
 
 CREATE TABLE users (
