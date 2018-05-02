@@ -11,6 +11,7 @@ export default class home extends Component {
       cdataLoaded: false,
       data: null,
       contributors: null,
+      gallery: [],
     };
   }
 
@@ -21,6 +22,7 @@ export default class home extends Component {
         this.setState({
           dataLoaded: true,
           data: products.data.products,
+          gallery: products.data.images.resources,
         });
       })
       .catch(err => {
@@ -49,6 +51,7 @@ export default class home extends Component {
           <Products
             products={this.state.data}
             contributors={this.state.contributors}
+            images={this.state.gallery}
           />
         ) : (
           'Loading..'

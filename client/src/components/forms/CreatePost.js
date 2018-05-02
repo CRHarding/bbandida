@@ -21,7 +21,7 @@ class gallery extends Component {
   }
 
   handleChange(e) {
-    console.log(e);
+    console.log(e.target.name);
     const name = e.target.name;
     const value = e.target.value;
     this.setState({
@@ -65,7 +65,6 @@ class gallery extends Component {
   }
 
   render() {
-    const { title, description } = this.state;
     return (
       <div>
         <AdminHeader />
@@ -78,12 +77,12 @@ class gallery extends Component {
                 fluid
                 label="Title"
                 placeholder="title"
-                value={title}
+                value={this.state.title}
                 onChange={this.handleChange}
               />
               <Form.TextArea
                 label="About"
-                value={description}
+                value={this.state.description}
                 placeholder="Tell us about this..."
                 onChange={this.handleChange}
               />
