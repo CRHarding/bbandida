@@ -6,5 +6,5 @@ import Gallery from './components/forms/gallery';
 import Admin from './components/forms/admin';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Admin />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
