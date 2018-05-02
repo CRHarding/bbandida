@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 const contributorController = require('../controllers/contributorController');
-import cloudinary from 'cloudinary';
+const cloudinary = require('cloudinary');
 
 cloudinary.config({
-  cloud_name: 'process.ENV.CLOUD_NAME',
-  api_key: 'process.ENV.API_KEY',
-  api_secret: 'proces.ENV.API_SECRET',
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 router.get('/', (req, res) => {
@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
     .getAllProducts()
     .then(products => {
       cloudinary.v2.api.resources(function(error, result) {
-        console.log(result);
         res.json({ products: products, images: result });
       });
     })

@@ -1,49 +1,39 @@
 import axios from 'axios';
 
 const Services = {
-	adminLogin(userInfo) {
-		console.log('This is services for admin login')
-	},
+  adminLogin(userInfo) {
+    console.log('This is services for admin login');
+  },
 
-	getProducts() {
-		console.log('This is services for getProducts');
-		return axios({
-			method: "GET",
-			url: "/api/products"
-		})
-	},
+  getProducts() {
+    console.log('This is services for getProducts');
+    return axios({
+      method: 'GET',
+      url: '/api/products',
+    });
+  },
 
-	editProduct(product) {
-		console.log('This is servcies for editProduct')
-	},
+  editProduct(product) {
+    console.log('This is servcies for editProduct');
+  },
 
-	deleteProduct(product) {
+  deleteProduct(product) {},
 
-	},
+  getContribs() {
+    console.log('This is services for getContribs');
+    return axios({
+      method: 'GET',
+      url: '/api/contributors',
+    });
+  },
 
-	getContribs() {
-		console.log('This is services for getContribs');
-		return axios({
-			method: "GET",
-			url: "/api/contributors"
-		})
-	},
+  editContrib(contribute) {},
 
-	editContrib(contribute) {
+  createBlog(blog) {},
 
-	},
+  editBlog(blog) {},
 
-	createBlog(blog) {
+  deleteBlog(blog) {},
+};
 
-	},
-
-	editBlog(blog) {
-
-	},
-
-	deleteBlog(blog) {
-
-	}
-}
-
-export default Services
+export default Services;
