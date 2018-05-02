@@ -71,17 +71,19 @@ class gallery extends Component {
         <br />
         <br />
         <Grid>
-          <Grid.Column width={4}>
+          <Grid.Column width={5}>
             <Form onSubmit={this.handleSubmit}>
               <Form.Input
                 fluid
                 label="Title"
+                name="title"
                 placeholder="title"
                 value={this.state.title}
                 onChange={this.handleChange}
               />
               <Form.TextArea
                 label="About"
+                name="description"
                 value={this.state.description}
                 placeholder="Tell us about this..."
                 onChange={this.handleChange}
@@ -89,7 +91,7 @@ class gallery extends Component {
               <Form.Button>Submit</Form.Button>
             </Form>
           </Grid.Column>
-          <Grid.Column width={10}>
+          <Grid.Column width={6}>
             <h1>Galleria</h1>
             <div className="upload">
               <button
