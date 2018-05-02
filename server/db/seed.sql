@@ -8,29 +8,32 @@ INSERT INTO users (email, password) VALUES
 
 INSERT INTO contributor (name, role, link) VALUES
   (
-    'Casey R Harding',
-    'Photographer',
-    'www.caseyharding.com'
-  );
-
-INSERT INTO contributor (name, role, link) VALUES
+    'Pop Mod',
+    'Photography',
+    'popmodphoto.org'
+  ),
   (
-    'Tom Choe',
-    'Beat Box',
-    'https://tomChoe.com'
-  );
-
-INSERT INTO contributor (name, role, link) VALUES
+    'Stevie Ann Smith',
+    'Hair',
+    'https://smithanddavissalon.com'
+  ),
   (
-    'Hani Zahra',
-    'DJ',
-    'http://HaniIsAwesome.com'
-  );
-
-INSERT INTO products (image_ids, description, contributors, price) VALUES
+    'Shannon O''Brien',
+    'Makeup',
+    'www.shannonobrienmua.com'
+  ),
   (
-    '{3, 7, 9, 1, 2}',
-    'BB and Ida fashionable dress',
-    '{2, 1, 3}',
-    '9.99'
+    '@thepowderandglory',
+    'Brows',
+    'https://esthetichaus.com'
+  ),
+  (
+    'dbleudazzled',
+    'Tights',
+    'www.dbleudazzled.com'
+  ),
+  (
+    'Damien Maloney',
+    'Photography',
+    'damienmaloney.com'
   );

@@ -24,7 +24,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/contributors', contributorRouter);
 
 app.get('/*', (req, res) => {
-  res.render('MADE IT!');
+  res.json('MADE IT!');
 });
 
 app.listen(PORT, () => {
