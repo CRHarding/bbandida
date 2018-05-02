@@ -4,10 +4,10 @@ import logo from '../images/bbandida.jpeg';
 
 const Header = () => {
   return (
-    <div class="header">
+    <div className="header">
       <nav className="white">
         <div className="nav-wrapper">
-          <a href="/" class="brand-logo center">
+          <a href="/" className="brand-logo center">
             <img src={logo} height="96" width="80" alt="logo" />
           </a>
           <ul id="nav-mobile" className="left hide-on-med-and-down">

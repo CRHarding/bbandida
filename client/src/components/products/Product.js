@@ -2,31 +2,38 @@ import React, { Component } from 'react';
 import ProductSingle from './ProductSingle';
 
 export default class Product extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			click: false
-		}
-		this.onClick = this.onClick.bind(this)
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      click: false,
+    };
+    this.onClick = this.onClick.bind(this);
+  }
 
-	onClick() {
-		this.setState({
-			click: !this.state.click
-		})
-		console.log('click', this.state.click)
-	}
+  onClick() {
+    this.setState({
+      click: !this.state.click,
+    });
+    console.log('click', this.state.click);
+  }
 
-	render() {
-		console.log('PRODUCT', this.props.product)
-		console.log('CONTRIBUTORS', this.props.contributors)
-		return(
-			<div>
-				{this.state.click ? <ProductSingle product={this.props.product} contributors={this.props.contributors}  /> : ''}
-				<img src={this.props.product.image_ids[0]} onClick={this.onClick} />
-			</div>
-		)
-	}
+  render() {
+    console.log('PRODUCT', this.props.product);
+    console.log('CONTRIBUTORS', this.props.contributors);
+    return (
+      <div>
+        {this.state.click ? (
+          <ProductSingle
+            product={this.props.product}
+            contributors={this.props.contributors}
+          />
+        ) : (
+          ''
+        )}
+        <img src={this.props.product.image_ids[0]} onClick={this.onClick} />
+      </div>
+    );
+  }
 }
 
 // const Product = (props) => {

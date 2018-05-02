@@ -1,26 +1,35 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { CloudinaryContext, Transformation, Image } from 'cloudinary-react';
+import { CloudinaryContext, Transformation } from 'cloudinary-react';
+import Services from '../services/Services';
+import Image from 'react-image-resizer';
 
 class gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
       gallery: [],
+      dataLoaded: false,
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
+    this.renderImages = this.renderImages.bind(this);
   }
 
   componentDidMount() {
-    axios
-      .get('https://res.cloudinary.com/bbandida/image/list/photos.json')
-      .then(response => {
+    Services.getProducts()
+      .then(products => {
+        console.log('Returned all products', products);
         this.setState({
-          gallery: response.data.resources,
+          dataLoaded: true,
+          data: products.data.products,
+          gallery: products.data.images.resources,
         });
+        console.log(this.state.gallery);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log('error in getting all products');
+      });
   }
 
   uploadWidget() {
@@ -34,8 +43,29 @@ class gallery extends Component {
   }
 
   renderSingleAdded() {
-    console.log(this.state.url);
     return <Image publicId={this.state.url} />;
+  }
+
+  renderImages() {
+    return (
+      <div className="ui centered three column grid">
+          {this.state.gallery.map(data => {
+            return (
+              <div className="column" key={data.public_id}>
+                  <a
+                    target="_blank"
+                    href={`https://res.cloudinary.com/bbandida/image/upload/${
+                      data.public_id
+                    }.jpg`}
+                  >
+                    <Image src={data.secure_url} width={240} height={240} />
+                  </a>
+              </div>
+            );
+          })}
+          {this.state.dataLoaded ? this.renderSingleAdded() : ''}
+      </div>
+    );
   }
 
   render() {
@@ -49,36 +79,7 @@ class gallery extends Component {
           >
             Add Image
           </button>
-        </div>
-        <div className="gallery">
-          <CloudinaryContext cloudName="bbandida">
-            {this.state.gallery.map(data => {
-              return (
-                <div className="responsive" key={data.public_id}>
-                  <div className="img">
-                    <a
-                      target="_blank"
-                      href={`https://res.cloudinary.com/bbandida/image/upload/${
-                        data.public_id
-                      }.jpg`}
-                    >
-                      <Image publicId={data.public_id}>
-                        <Transformation
-                          crop="scale"
-                          width="300"
-                          height="200"
-                          dpr="auto"
-                          responsive_placeholder="blank"
-                        />
-                      </Image>
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
-            {this.state.loaded ? this.renderSingleAdded() : ''}
-          </CloudinaryContext>
-          <div className="clearfix" />
+          {this.state.dataLoaded ? this.renderImages() : ''}
         </div>
       </div>
     );

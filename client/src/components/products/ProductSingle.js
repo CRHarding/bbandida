@@ -17,11 +17,11 @@ const ProductSingle = props => {
       {contributors.map(contributor => {
         return (
           <p>
-            contributor: {contributor[0].name}
+            contributor: {contributor.name}
             <br />
-            role: {contributor[0].role}
+            role: {contributor.role}
             <br />
-            link: {contributor[0].link}
+            link: {contributor.link}
           </p>
         );
       })}
