@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProductSingle from './ProductSingle';
+import Image from 'react-image-resizer';
 
 export default class Product extends Component {
   constructor(props) {
@@ -14,56 +15,22 @@ export default class Product extends Component {
     this.setState({
       click: !this.state.click,
     });
-    console.log('click', this.state.click);
   }
 
   render() {
-    console.log('PRODUCT', this.props.product);
-    console.log('CONTRIBUTORS', this.props.contributors);
     return (
       <div>
         {this.state.click ? (
           <ProductSingle
             product={this.props.product}
             contributors={this.props.contributors}
+            images={this.props.images}
           />
         ) : (
           ''
         )}
-        <img src={this.props.product.image_ids[0]} onClick={this.onClick} />
+         <img src={this.props.images[this.props.product.image_ids[0]].secure_url} onClick={this.onClick} alt="image" width={240} height={240} />
       </div>
     );
   }
 }
-
-// const Product = (props) => {
-// 	// const click = () => {
-// 	// 	this.setState({
-// 	// 		show: false
-// 	// 	});
-// 	// 	console.log('click')
-// 	// }
-// 	console.log('PRODUCT ->', props)
-// 	let contributors = props.contributors.map(contributor => {
-// 		return props.contribs.filter(contrib => contrib.id === contributor)
-// 	})
-// 	return (
-// 		<div>
-// 			{/* if user clicks photo product description */}
-// 			<ProductSingle />
-
-// 			{/*<p> {props.description} </p>
-// 			<p> {props.price} </p>*/}
-// 			{props.image_ids.map(image => {
-// 				return <div key={image} ><img src="#" /></div>
-// 			})}
-// 			{contributors.map(contrib => {
-// 				console.log(contrib)
-// 				return  <p>contributor: {contrib[0].name}<br/>
-// 						   role: {contrib[0].role}<br/>
-// 						   link: {contrib[0].link}</p>
-
-// 			})}
-// 		</div>
-// 	)
-// }

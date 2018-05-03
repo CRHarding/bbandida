@@ -70,7 +70,7 @@ class gallery extends Component {
         <br />
         <br />
         <Grid>
-          <Grid.Column width={4}>
+          <Grid.Column width={5}>
             <Form onSubmit={this.handleSubmit}>
               <Form.Input
                 fluid
@@ -90,7 +90,7 @@ class gallery extends Component {
               <Form.Button>Submit</Form.Button>
             </Form>
           </Grid.Column>
-          <Grid.Column width={10}>
+          <Grid.Column width={6}>
             <h1>Galleria</h1>
             <div className="upload">
               <button
