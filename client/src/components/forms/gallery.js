@@ -17,11 +17,17 @@ class gallery extends Component {
   componentDidMount() {
     Services.getProducts()
       .then(products => {
-        console.log('Returned all products', products);
+        const filterProduct = products.data.images.resources.filter(product => {
+          console.log(product);
+          if (product.tags.length !== 0) {
+            return product;
+          }
+        });
+
         this.setState({
           dataLoaded: true,
           data: products.data.products,
-          gallery: products.data.images.resources,
+          gallery: filterProduct,
         });
         console.log(this.state.gallery);
       })

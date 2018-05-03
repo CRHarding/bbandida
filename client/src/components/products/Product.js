@@ -28,7 +28,6 @@ export default class Product extends Component {
 
   render() {
     const image = this.getMainImages();
-    console.log(image[0].secure_url);
     return (
       <div>
         <img

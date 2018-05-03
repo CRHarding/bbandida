@@ -18,7 +18,6 @@ export default class home extends Component {
   componentDidMount() {
     Services.getProducts()
       .then(products => {
-        console.log(products);
         this.setState({
           dataLoaded: true,
           data: products.data.products,

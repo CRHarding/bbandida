@@ -21,7 +21,6 @@ export default class Products extends Component {
   }
 
   onClick(product) {
-    console.log(product);
     if (!this.state.click || this.state.currentProduct !== product) {
       smoothscroll.polyfill();
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
