@@ -4,7 +4,7 @@ import logo from '../images/bbandida.jpeg';
 
 const Header = () => {
   return (
-    <div className="header">
+    <div className="header hoverable">
       <nav className="white">
         <div className="nav-wrapper">
           <a href="/" className="brand-logo center">
