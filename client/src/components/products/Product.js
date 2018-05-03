@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProductSingle from './ProductSingle';
 import Image from 'react-image-resizer';
 
 export default class Product extends Component {
@@ -8,28 +7,17 @@ export default class Product extends Component {
     this.state = {
       click: false,
     };
-    this.onClick = this.onClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  onClick() {
-    this.setState({
-      click: !this.state.click,
-    });
+  handleClick(product) {
+    this.props.handleClick(product);
   }
 
   render() {
     return (
       <div>
-        {this.state.click ? (
-          <ProductSingle
-            product={this.props.product}
-            contributors={this.props.contributors}
-            images={this.props.images}
-          />
-        ) : (
-          ''
-        )}
-         <img src={this.props.images[this.props.product.image_ids[0]].secure_url} onClick={this.onClick} alt="image" width={240} height={240} />
+        <img src={this.props.images[this.props.product.image_ids[0]].secure_url} onClick={() => this.handleClick(this.props.product)} alt="image" width={240} height={240} />
       </div>
     );
   }

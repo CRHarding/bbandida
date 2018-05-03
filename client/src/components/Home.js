@@ -18,7 +18,6 @@ export default class home extends Component {
   componentDidMount() {
     Services.getProducts()
       .then(products => {
-        console.log('Returned all products', products);
         this.setState({
           dataLoaded: true,
           data: products.data.products,
@@ -31,7 +30,6 @@ export default class home extends Component {
 
     Services.getContribs()
       .then(contribs => {
-        console.log('Returned all contributors', contribs);
         this.setState({
           cdataLoaded: true,
           contributors: contribs.data.contributors,

@@ -4,7 +4,6 @@ const ProductSingle = props => {
   let contributors = props.product.contributors.map(contributor => {
     return props.contributors.filter(contrib => contrib.id === contributor);
   });
-  console.log('product single', props)
   return (
     <div>
       <h1>product Single view</h1>
