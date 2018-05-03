@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Grid } from 'semantic-ui-react';
-import { CloudinaryContext, Transformation } from 'cloudinary-react';
 import Services from '../services/Services';
 import Image from 'react-image-resizer';
 import AdminHeader from './AdminHeader';
@@ -52,7 +51,7 @@ class gallery extends Component {
   uploadWidget() {
     let _this = this;
     window.cloudinary.openUploadWidget(
-      { cloud_name: 'bbandida', upload_preset: 'q0zswxx7', tags: ['photos'] },
+      { cloud_name: 'bbandida', upload_preset: 'q0zswxx7', tags: `${_this.state.title}` },
       function(error, result) {
         _this.setState({ gallery: _this.state.gallery.concat(result) });
       },

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { CloudinaryContext, Transformation } from 'cloudinary-react';
 import Services from '../services/Services';
 import Image from 'react-image-resizer';
 

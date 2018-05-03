@@ -21,7 +21,8 @@ CREATE TABLE contributor (
 
 CREATE TABLE products (
   id SERIAL PRIMARY KEY,
-  image_ids integer ARRAY,
+  tag VARCHAR(255),
+  images VARCHAR(255) ARRAY,
   description VARCHAR(255),
   contributors integer ARRAY,
   price float default 0,

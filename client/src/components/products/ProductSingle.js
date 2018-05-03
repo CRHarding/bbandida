@@ -7,10 +7,10 @@ const ProductSingle = props => {
   return (
     <div>
       <h1>product Single view</h1>
-      {props.product.image_ids.map(image => {
+      {props.images.map(image => {
         return (
           <div key={image}>
-            <img src="#" />
+            <img src={image.secure_url} />
           </div>
         );
       })}

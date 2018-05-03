@@ -17,6 +17,7 @@ export default class Products extends Component {
 
     this.showProducts = this.showProducts.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.getImages = this.getImages.bind(this);
   }
 
   onClick(product) {
@@ -27,7 +28,9 @@ export default class Products extends Component {
     }
 
     if (this.state.currentProduct !== product) {
+      const productImages = this.getImages(product);
       this.setState({
+        images: productImages,
         currentProduct: product,
         click: true,
       });
@@ -38,14 +41,27 @@ export default class Products extends Component {
     }
   }
 
+  getImages(product) {
+    const productImages = this.props.images.map(image => {
+      if (image.tags.includes(product.tag)) {
+        return image;
+      }
+    });
+    return productImages.filter(image => {
+      if (image !== null) {
+        return image;
+      }
+    });
+  }
+
   showProducts() {
     return this.props.products.map(product => {
+      product.images = this.getImages(product);
       return (
         <Grid.Column>
           <Product
             product={product}
             key={product.id}
-            images={this.props.images}
             handleClick={() => this.onClick(product)}
           />
         </Grid.Column>
@@ -67,9 +83,7 @@ export default class Products extends Component {
           ''
         )}
         <Grid>
-          <Grid.Row columns={3}>
-            {this.showProducts()}
-          </Grid.Row>
+          <Grid.Row columns={3}>{this.showProducts()}</Grid.Row>
         </Grid>
       </div>
     );

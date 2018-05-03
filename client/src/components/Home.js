@@ -18,6 +18,7 @@ export default class home extends Component {
   componentDidMount() {
     Services.getProducts()
       .then(products => {
+        console.log(products);
         this.setState({
           dataLoaded: true,
           data: products.data.products,
@@ -25,7 +26,7 @@ export default class home extends Component {
         });
       })
       .catch(err => {
-        console.log('error in getting all products');
+        console.log('error in getting all products --->', err);
       });
 
     Services.getContribs()

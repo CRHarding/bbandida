@@ -10,12 +10,25 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
+let result = [];
+let options = { type: 'upload', max_results: 50, tags: 'true' };
+
 router.get('/', (req, res) => {
   productController
     .getAllProducts()
     .then(products => {
-      cloudinary.v2.api.resources(function(error, result) {
-        res.json({ products: products, images: result });
+      let result = [];
+      let options = { max_results: 500, tags: 'true' };
+      cloudinary.v2.api.resources(options, function(error, response) {
+        while (response.hasOwnProperty('next_cursor')) {
+          console.log(products, response);
+          result.concat(response);
+          cloudinary.v2.api.resources(options, function(error, response) {
+            result.concat(response);
+          });
+        }
+
+        res.json({ products: products, images: response });
       });
     })
     .catch(err => {
