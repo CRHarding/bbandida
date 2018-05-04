@@ -1,35 +1,61 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { Grid, Image, Button } from 'semantic-ui-react';
+import EditPost from '../forms/EditPost';
 
-const ProductSingle = props => {
-  let contributors = props.product.contributors.map(contributor => {
-    return props.contributors.filter(contrib => contrib.id === contributor);
-  });
-  return (
-    <div>
-      <h1>product Single view</h1>
-      {props.images.map(image => {
-        return (
-          <Grid>
-            <Grid.Row columns={3}>
-              <img src={image.secure_url} />
-            </Grid.Row>
-          </Grid>
-        );
-      })}
-      {contributors.map(contributor => {
-        return (
-          <p>
-            contributor: {contributor.name}
-            <br />
-            role: {contributor.role}
-            <br />
-            link: {contributor.link}
-          </p>
-        );
-      })}
-    </div>
-  );
-};
+export default class ProductSingle extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    }
+    this.showEdit = this.showEdit.bind(this)
+  }
 
-export default ProductSingle;
+  showEdit() {
+    this.setState({ show: !this.state.show })
+  }
+
+  render() {
+    let contributors = this.props.product.contributors.map(contributor => {
+      return this.props.contributors.filter(contrib => contrib.id === contributor);
+    });
+
+    return (
+      <div>
+        <h1>single view</h1>
+        <Grid centered columns={2}>
+          <Grid.Row verticalAlign='middle'>
+            <Grid.Column>
+              <p>{this.props.product.description}</p>
+
+              {contributors.map(contributor => {
+                return (
+                  <p>
+                    contributor: {contributor[0].name}
+                    <br />
+                    role: {contributor[0].role}
+                    <br />
+                    link: {contributor[0].link}
+                  </p>
+                );
+              })}
+            {/* thinking maybe we put edit here if logged in */}  
+            <Button primary onClick={this.showEdit}>Edit</Button>
+            {this.state.show ? <EditPost product={this.props.product} contributor={this.props.contributors} /> : '' }
+
+            </Grid.Column>
+            <Grid.Column>
+              {this.props.images.map(image => {
+                return (
+                    <Image src={image.secure_url}
+                           centered
+                    />
+                )}
+               )}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
+      );
+    }
+}
