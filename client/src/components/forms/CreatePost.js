@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Grid, Button } from 'semantic-ui-react';
+import { Form, Grid, Button, Menu, Segment } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import Services from '../services/Services';
 import Image from 'react-image-resizer';
@@ -20,6 +20,7 @@ class CreatePost extends Component {
       url: '',
       uploadMain: false,
       mainImage: '',
+      activeItem: 'edit',
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
@@ -41,6 +42,8 @@ class CreatePost extends Component {
       contentSubmit: true,
     });
   }
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   sendFormToDatabase() {
     const product = {
@@ -112,27 +115,46 @@ class CreatePost extends Component {
   }
 
   renderProductInformation() {
+    const { activeItem } = this.state;
     return (
       <Grid>
-        <Grid.Column width={5}>
+        <Grid.Column width={4}>
           <h1>{this.state.title}</h1>
           <h4>{this.state.description}</h4>
-          <Button onClick={this.editContent.bind(this)}>Edit Content</Button>
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <h1>{this.state.title}</h1>
-          <div className="upload">
-            <Button onClick={this.uploadWidget.bind(this)}>Add Image</Button>
+          <Menu fluid vertical tabular>
+            <Menu.Item
+              name="edit"
+              active={activeItem === 'edit'}
+              onClick={this.handleItemClick}
+            >
+              <Button onClick={this.editContent.bind(this)}>
+                Edit Content
+              </Button>
+            </Menu.Item>
+            <Menu.Item
+              name="add"
+              active={activeItem === 'add'}
+              onClick={this.handleItemClick}
+            >
+              <Button onClick={this.uploadWidget.bind(this)}>Add Image</Button>
+            </Menu.Item>
             {this.state.uploadMain ? (
               ''
             ) : (
-              <Button onClick={this.addMainUploadWidget.bind(this)}>
-                Add Main Image
-              </Button>
+              <Menu.Item
+                name="addMain"
+                active={activeItem === 'addMain'}
+                onClick={this.handleItemClick}
+              >
+                <Button onClick={this.addMainUploadWidget.bind(this)}>
+                  Add Main Image
+                </Button>
+              </Menu.Item>
             )}
-          </div>
+            <Button onClick={this.sendFormToDatabase.bind(this)}>Finish</Button>
+          </Menu>
         </Grid.Column>
-        <Button onClick={this.sendFormToDatabase.bind(this)}>Finish</Button>
+        {this.state.dataLoaded ? this.renderImages() : ''}
       </Grid>
     );
   }
@@ -165,24 +187,17 @@ class CreatePost extends Component {
   renderImages() {
     console.log(this.state.gallery);
     return (
-      <div className="ui centered three column grid">
+      <Segment>
         {this.state.gallery.map(data => {
           return (
-            <div className="column" key={data.public_id}>
-              <a
-                target="_blank"
-                href={`https://res.cloudinary.com/bbandida/image/upload/${
-                  data.public_id
-                }.jpg`}
-              >
-                <Image src={data.secure_url} width={240} height={240} />
-              </a>
-              {data.tags.includes('main') ? <div>Main Image</div> : ''}
+            <div>
+              <Image src={data.secure_url} width={240} height={240} avatar />
+              {data.tags.includes('main') ? (<span>Main Image</span>) : ''}
             </div>
           );
         })}
         {this.state.dataLoaded ? this.renderSingleAdded() : ''}
-      </div>
+      </Segment>
     );
   }
 
@@ -196,7 +211,6 @@ class CreatePost extends Component {
         {this.state.contentSubmit
           ? this.renderProductInformation()
           : this.renderCreateForm()}
-        {this.state.dataLoaded ? this.renderImages() : ''}
         {this.state.fireRedirect && <Redirect to={'/admin'} />}
       </div>
     );

@@ -38,12 +38,13 @@ INSERT INTO contributor (name, role, link) VALUES
     'damienmaloney.com'
   );
 
-  INSERT INTO products (tag, description, contributors, images, price, number_sold) VALUES
+  INSERT INTO products (tag, description, contributors, images, mainImage, price, number_sold) VALUES
     (
       'rose-dress',
       'Dress: bb+ida, worsted wool, purple polyester, hand woven detail',
       '{}',
       '{}',
+      '',
       0,
       0
     ),
@@ -52,6 +53,7 @@ INSERT INTO contributor (name, role, link) VALUES
       'Fuying Coat  Coat: bb+ida',
       '{}',
       '{}',
+      '',
       0,
       0
     ),
@@ -60,6 +62,7 @@ INSERT INTO contributor (name, role, link) VALUES
       'Sara October 2015 Vintage Repurpost',
       '{1}',
       '{}',
+      '',
       0,
       0
     ),
@@ -68,6 +71,7 @@ INSERT INTO contributor (name, role, link) VALUES
       'Suzi Custom coat',
       '{}',
       '{}',
+      '',
       0,
       0
     ),
@@ -76,6 +80,7 @@ INSERT INTO contributor (name, role, link) VALUES
       'Alina Custom Bridemaids Dresses',
       '{}',
       '{}',
+      '',
       0,
       0
     );
