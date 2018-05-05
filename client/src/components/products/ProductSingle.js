@@ -1,5 +1,4 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
 
 const ProductSingle = props => {
   let contributors = props.product.contributors.map(contributor => {
@@ -8,13 +7,11 @@ const ProductSingle = props => {
   return (
     <div>
       <h1>product Single view</h1>
-      {props.images.map(image => {
+      {props.product.image_ids.map(image => {
         return (
-          <Grid>
-            <Grid.Row columns={3}>
-              <img src={image.secure_url} />
-            </Grid.Row>
-          </Grid>
+          <div key={image}>
+            <img src="#" />
+          </div>
         );
       })}
       {contributors.map(contributor => {

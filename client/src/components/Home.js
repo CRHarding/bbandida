@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './static/Header';
 import Products from './products/Products';
 import Services from './services/Services';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 export default class home extends Component {
   constructor() {
@@ -52,7 +53,9 @@ export default class home extends Component {
             images={this.state.gallery}
           />
         ) : (
-          'Loading..'
+          <Dimmer active inverted>
+            <Loader inverted content='Loading' />
+          </Dimmer>
         )}
       </div>
     );

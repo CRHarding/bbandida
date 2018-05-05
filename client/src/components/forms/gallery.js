@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Services from '../services/Services';
 import Image from 'react-image-resizer';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 class gallery extends Component {
   constructor(props) {
@@ -29,7 +30,6 @@ class gallery extends Component {
           data: products.data.products,
           gallery: filterProduct,
         });
-        console.log(this.state.gallery);
       })
       .catch(err => {
         console.log('error in getting all products');
@@ -53,21 +53,21 @@ class gallery extends Component {
   renderImages() {
     return (
       <div className="ui centered three column grid">
-          {this.state.gallery.map(data => {
-            return (
-              <div className="column" key={data.public_id}>
-                  <a
-                    target="_blank"
-                    href={`https://res.cloudinary.com/bbandida/image/upload/${
-                      data.public_id
-                    }.jpg`}
-                  >
-                    <Image src={data.secure_url} width={240} height={240} />
-                  </a>
-              </div>
-            );
-          })}
-          {this.state.dataLoaded ? this.renderSingleAdded() : ''}
+        {this.state.gallery.map(data => {
+          return (
+            <div className="column" key={data.public_id}>
+              <a
+                target="_blank"
+                href={`https://res.cloudinary.com/bbandida/image/upload/${
+                  data.public_id
+                }.jpg`}
+              >
+                <Image src={data.secure_url} width={240} height={240} />
+              </a>
+            </div>
+          );
+        })}
+        {this.state.dataLoaded ? this.renderSingleAdded() : ''}
       </div>
     );
   }
@@ -83,7 +83,13 @@ class gallery extends Component {
           >
             Add Image
           </button>
-          {this.state.dataLoaded ? this.renderImages() : ''}
+          {this.state.dataLoaded ? (
+            this.renderImages()
+          ) : (
+            <Dimmer active inverted>
+              <Loader inverted content="Loading" />
+            </Dimmer>
+          )}
         </div>
       </div>
     );

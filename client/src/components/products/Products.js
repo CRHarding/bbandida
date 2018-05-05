@@ -28,6 +28,8 @@ export default class Products extends Component {
 
     if (this.state.currentProduct !== product) {
       const productImages = this.getImages(product);
+      smoothscroll.polyfill();
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
       this.setState({
         images: productImages,
         currentProduct: product,
@@ -73,11 +75,15 @@ export default class Products extends Component {
       <div>
         <h4>Main Products</h4>
         {this.state.click ? (
-          <ProductSingle
-            product={this.state.currentProduct}
-            contributors={this.state.contributors}
-            images={this.state.images}
-          />
+          <Grid>
+            <Grid.Row columns={3}>
+              <ProductSingle
+                product={this.state.currentProduct}
+                contributors={this.state.contributors}
+                images={this.state.images}
+              />
+            </Grid.Row>
+          </Grid>
         ) : (
           ''
         )}

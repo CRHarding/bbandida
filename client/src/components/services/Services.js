@@ -12,6 +12,14 @@ const Services = {
     });
   },
 
+  addProducts(product) {
+    return axios({
+      method: 'POST',
+      url: '/api/products',
+      data: product,
+    });
+  },
+
   editProduct(product) {
     console.log('This is servcies for editProduct');
   },

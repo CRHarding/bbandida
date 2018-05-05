@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const productObject = {
-    image_ids: req.body.image_ids,
+    title: req.body.title,
     description: req.body.description,
     contributors: req.body.contributors,
     price: req.body.price,
