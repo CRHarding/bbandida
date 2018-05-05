@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Grid, Button } from 'semantic-ui-react';
+import { Redirect } from 'react-router';
 import Services from '../services/Services';
 import Image from 'react-image-resizer';
 import AdminHeader from './AdminHeader';
@@ -13,6 +14,7 @@ class CreatePost extends Component {
       title: '',
       description: '',
       titleSubmit: false,
+      fireRedirect: false,
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
@@ -36,7 +38,22 @@ class CreatePost extends Component {
   }
 
   sendFormToDatabase() {
-    Services.
+    const product = {
+      title: this.state.title,
+      description: this.state.description,
+      contributors: [],
+      images: this.state.gallery,
+    };
+    Services.addProducts(product)
+      .then(product => {
+        console.log('successfuly added product-->', product);
+        this.setState({
+          fireRedirect: true,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   uploadWidget() {
@@ -133,6 +150,7 @@ class CreatePost extends Component {
         {this.state.contentSubmit
           ? this.renderProductInformation()
           : this.renderCreateForm()}
+        {this.state.fireRedirect && <Redirect to={'/admin'} />}
       </div>
     );
   }

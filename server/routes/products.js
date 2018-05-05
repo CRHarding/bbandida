@@ -42,6 +42,7 @@ router.post('/', (req, res) => {
     description: req.body.description,
     contributors: req.body.contributors,
     price: req.body.price,
+    images: req.body.images,
   };
   console.log(productObject);
   if (productObject.contributors.length > 0) {

@@ -8,9 +8,9 @@ module.exports = {
   addProduct(product) {
     return productDB.one(
       `INSERT INTO products
-                            (image_ids, description, contributors, price)
+                            (images, description, contributors, price)
                           VALUES
-                            ($[image_ids], $[description],
+                            ($[images], $[description],
                             $[contributors], $[price])
                             RETURNING *`,
       product,
