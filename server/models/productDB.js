@@ -21,7 +21,7 @@ module.exports = {
     console.log(product);
     return productDB.one(
       `UPDATE products
-        SET image_ids = $[image_ids], description = $[description], price=$[price], number_sold = $[number_sold]
+        SET images = $[images], mainImage = $[mainImage], description = $[description], price=$[price], number_sold = $[number_sold]
                           WHERE id = $[id] RETURNING *`,
       product,
     );

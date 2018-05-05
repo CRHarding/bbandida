@@ -1,46 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 import logo from '../images/bbandida.jpeg';
 
-const Header = () => {
-  return (
-    <div className="header">
-      <nav className="white">
-        <div className="nav-wrapper">
-          <a href="/" className="brand-logo center">
-            <img src={logo} height="96" width="80" alt="logo" />
-          </a>
-          <ul id="nav-mobile" className="left hide-on-med-and-down">
-            <li>
-              <Link to="/post/create" className="blue-text">
-                Create
-              </Link>
-            </li>
-            <li>
-              <Link to="/post/edit" className="blue-text">
-                Edit
-              </Link>
-            </li>
-            <li>
-              <Link to="/blog/new" className="blue-text">
-                Write New Blog
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact/update" className="blue-text">
-                Update Contact Info
-              </Link>
-            </li>
-            <li>
-              <Link to="/about/update" className="blue-text">
-                Update About Me
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  );
-};
+export default class Header extends React.Component {
+  state = {};
 
-export default Header;
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  render() {
+    const { activeItem } = this.state;
+
+    return (
+      <Menu stackable>
+        <Menu.Item name="create" active={activeItem === 'create'} onClick={this.handleItemClick}>
+          <Link to="/post/create" className="blue-text">
+            Create
+          </Link>
+        </Menu.Item>
+        <Menu.Item name="edit" active={activeItem === 'edit'} onClick={this.handleItemClick}>
+          <Link to="/post/edit" className="blue-text">
+            Edit
+          </Link>
+        </Menu.Item>
+        <Menu.Menu position='right'>
+          <Menu.Item name="blog" active={activeItem === 'blog'} onClick={this.handleItemClick}>
+            <Link to="/blog/new" className="blue-text">
+              Write New Blog
+            </Link>
+          </Menu.Item>
+          <Menu.Item name="contact" active={activeItem === 'contact'} onClick={this.handleItemClick}>
+            <Link to="/contact/update" className="blue-text">
+              Update Contact Info
+            </Link>
+          </Menu.Item>
+          <Menu.Item name = "about" active={activeItem === 'about'} onClick={this.handleItemClick}>
+            <Link to="/about/update" className="blue-text">
+              Update About Me
+            </Link>
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
+    );
+  };
+}

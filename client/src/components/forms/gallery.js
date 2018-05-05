@@ -11,8 +11,6 @@ class gallery extends Component {
       dataLoaded: false,
       url: '',
     };
-    this.renderSingleAdded = this.renderSingleAdded.bind(this);
-    this.uploadWidget = this.uploadWidget.bind(this);
     this.renderImages = this.renderImages.bind(this);
   }
 
@@ -36,20 +34,6 @@ class gallery extends Component {
       });
   }
 
-  uploadWidget() {
-    let _this = this;
-    window.cloudinary.openUploadWidget(
-      { cloud_name: 'bbandida', upload_preset: 'q0zswxx7', tags: ['photos'] },
-      function(error, result) {
-        _this.setState({ gallery: _this.state.gallery.concat(result), url: result.secure_url });
-      },
-    );
-  }
-
-  renderSingleAdded() {
-    return <Image publicId={this.state.url} />;
-  }
-
   renderImages() {
     return (
       <div className="ui centered three column grid">
@@ -67,7 +51,6 @@ class gallery extends Component {
             </div>
           );
         })}
-        {this.state.dataLoaded ? this.renderSingleAdded() : ''}
       </div>
     );
   }
@@ -75,22 +58,13 @@ class gallery extends Component {
   render() {
     return (
       <div className="main">
-        <h1>Galleria</h1>
-        <div className="upload">
-          <button
-            onClick={this.uploadWidget.bind(this)}
-            className="upload-button"
-          >
-            Add Image
-          </button>
-          {this.state.dataLoaded ? (
-            this.renderImages()
-          ) : (
-            <Dimmer active inverted>
-              <Loader inverted content="Loading" />
-            </Dimmer>
-          )}
-        </div>
+        {this.state.dataLoaded ? (
+          this.renderImages()
+        ) : (
+          <Dimmer active inverted>
+            <Loader inverted content="Loading" />
+          </Dimmer>
+        )}
       </div>
     );
   }
