@@ -9,6 +9,7 @@ class gallery extends Component {
     this.state = {
       gallery: [],
       dataLoaded: false,
+      url: '',
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
@@ -19,7 +20,6 @@ class gallery extends Component {
     Services.getProducts()
       .then(products => {
         const filterProduct = products.data.images.resources.filter(product => {
-          console.log(product);
           if (product.tags.length !== 0) {
             return product;
           }
@@ -41,7 +41,7 @@ class gallery extends Component {
     window.cloudinary.openUploadWidget(
       { cloud_name: 'bbandida', upload_preset: 'q0zswxx7', tags: ['photos'] },
       function(error, result) {
-        _this.setState({ gallery: _this.state.gallery.concat(result) });
+        _this.setState({ gallery: _this.state.gallery.concat(result), url: result.secure_url });
       },
     );
   }

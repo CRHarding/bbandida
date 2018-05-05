@@ -4,17 +4,22 @@ import { Redirect } from 'react-router';
 import Services from '../services/Services';
 import Image from 'react-image-resizer';
 import AdminHeader from './AdminHeader';
+import { CloudinaryContext, Transformation } from 'cloudinary-react';
 
 class CreatePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
       gallery: [],
+      productImages: [],
       dataLoaded: false,
       title: '',
       description: '',
       titleSubmit: false,
       fireRedirect: false,
+      url: '',
+      uploadMain: false,
+      mainImage: '',
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
@@ -42,7 +47,8 @@ class CreatePost extends Component {
       title: this.state.title,
       description: this.state.description,
       contributors: [],
-      images: this.state.gallery,
+      images: this.state.productImages,
+      mainImage: this.state.mainImage,
     };
     Services.addProducts(product)
       .then(product => {
@@ -65,7 +71,12 @@ class CreatePost extends Component {
         tags: `${_this.state.title}`,
       },
       function(error, result) {
-        _this.setState({ gallery: _this.state.gallery.concat(result) });
+        _this.setState({
+          gallery: _this.state.gallery.concat(result),
+          productImages: _this.state.productImages.concat(result[0].secure_url),
+          url: result.secure_url,
+          dataLoaded: true,
+        });
       },
     );
   }
@@ -79,7 +90,13 @@ class CreatePost extends Component {
         tags: [`${_this.state.title}`, 'main'],
       },
       function(error, result) {
-        _this.setState({ gallery: _this.state.gallery.concat(result) });
+        _this.setState({
+          gallery: _this.state.gallery.concat(result),
+          mainImage: result.public_id,
+          url: result.secure_url,
+          dataLoaded: true,
+          uploadMain: true,
+        });
       },
     );
   }
@@ -106,9 +123,13 @@ class CreatePost extends Component {
           <h1>{this.state.title}</h1>
           <div className="upload">
             <Button onClick={this.uploadWidget.bind(this)}>Add Image</Button>
-            <Button onClick={this.addMainUploadWidget.bind(this)}>
-              Add Main Image
-            </Button>
+            {this.state.uploadMain ? (
+              ''
+            ) : (
+              <Button onClick={this.addMainUploadWidget.bind(this)}>
+                Add Main Image
+              </Button>
+            )}
           </div>
         </Grid.Column>
         <Button onClick={this.sendFormToDatabase.bind(this)}>Finish</Button>
@@ -141,7 +162,32 @@ class CreatePost extends Component {
     );
   }
 
+  renderImages() {
+    console.log(this.state.gallery);
+    return (
+      <div className="ui centered three column grid">
+        {this.state.gallery.map(data => {
+          return (
+            <div className="column" key={data.public_id}>
+              <a
+                target="_blank"
+                href={`https://res.cloudinary.com/bbandida/image/upload/${
+                  data.public_id
+                }.jpg`}
+              >
+                <Image src={data.secure_url} width={240} height={240} />
+              </a>
+              {data.tags.includes('main') ? <div>Main Image</div> : ''}
+            </div>
+          );
+        })}
+        {this.state.dataLoaded ? this.renderSingleAdded() : ''}
+      </div>
+    );
+  }
+
   render() {
+    console.log(this.state.dataLoaded);
     return (
       <div>
         <AdminHeader />
@@ -150,6 +196,7 @@ class CreatePost extends Component {
         {this.state.contentSubmit
           ? this.renderProductInformation()
           : this.renderCreateForm()}
+        {this.state.dataLoaded ? this.renderImages() : ''}
         {this.state.fireRedirect && <Redirect to={'/admin'} />}
       </div>
     );
