@@ -6,6 +6,7 @@ export default class EditPostForm extends Component {
 	constructor(props) {
 		super(props)
 		this.state={
+			id: this.props.product.id,
 			title: '',
 			description: '',
 			fireRedirect: false
@@ -15,8 +16,8 @@ export default class EditPostForm extends Component {
 	}
 
 	submitEdit() {
-		console.log('Submitting Edit')
-		Services.editProduct()
+		console.log('Submitting Edit', this.state)
+		Services.editProduct(this.state)
 	}
 
 	handleChange(e) {
@@ -34,8 +35,12 @@ export default class EditPostForm extends Component {
 	        <br />	
 	        <h4> EDIT FORM </h4>
 	        <br />
-
 	            <Form onSubmit={this.submitEdit}>
+	              <Form.Input
+	              	type="hidden"
+	              	name="id"
+	              	value={this.props.product.id}
+	              />
 	              <Form.Input
 	                fluid
 	                label="Title"

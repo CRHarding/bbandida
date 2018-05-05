@@ -16,7 +16,7 @@ export default class NewBlog extends Component {
 
 	submitForm() {
 		console.log('Submitting blog', this.state)
-		Services.createBlog()
+		Services.createBlog(this.state)
 	}
 
 	handleChange(e) {
