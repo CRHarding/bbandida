@@ -33,7 +33,7 @@ export default class Product extends Component {
         <img
           src={image[0].secure_url}
           onClick={() => this.handleClick(this.props.product)}
-          alt="image"
+          alt="img"
           width={240}
           height={240}
         />

@@ -13,7 +13,7 @@ const Services = {
   },
 
   editProduct(product) {
-    console.log('This is servcies for editProduct');
+    console.log('This is services for editProduct', product);
   },
 
   deleteProduct(product) {},
@@ -27,7 +27,9 @@ const Services = {
 
   editContrib(contribute) {},
 
-  createBlog(blog) {},
+  createBlog(blog) {
+    console.log('This is services for createBlog', blog)
+  },
 
   editBlog(blog) {},
 
