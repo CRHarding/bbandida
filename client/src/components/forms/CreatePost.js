@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Form, Grid, Button, Menu, Segment, Image, Input, Label } from 'semantic-ui-react';
+import {
+  Form,
+  Grid,
+  Button,
+  Menu,
+  Segment,
+  Image,
+  Input,
+  Label,
+} from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import Services from '../services/Services';
 // import Image from 'react-image-resizer';
@@ -148,7 +157,18 @@ class CreatePost extends Component {
               name="price"
               active={activeItem === 'price'}
               onClick={this.handleItemClick}
-            ><Input action={{ color: 'teal', labelPosition: 'left', icon: 'cart', content: 'Price' }} actionPosition='left' placeHolder 'Price' defaultValue='9.99'/>
+            >
+              <Input
+                action={{
+                  color: 'teal',
+                  labelPosition: 'left',
+                  icon: 'cart',
+                  content: 'Price',
+                }}
+                actionPosition="left"
+                placeHolder="Price"
+                defaultValue="9.99"
+              />
               <Button onClick={this.editPrice.bind(this)}>Add Price</Button>
             </Menu.Item>
             <Menu.Item
