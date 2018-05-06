@@ -18,12 +18,17 @@ export default class home extends Component {
 
   componentDidMount() {
     Services.getProducts()
-      .then(products => {
-        console.log('HOME Products -',products);
+      .then(responseProducts => {
+        const images = responseProducts.data.images;
+        let products = responseProducts.data.products;
+        for (let i = 0; i < products.length; i++) {
+          products[i].images = images[i];
+        }
+
+        console.log('HOME Products --->', products);
         this.setState({
           dataLoaded: true,
-          data: products.data.products,
-          gallery: products.data.images.resources,
+          data: products,
         });
       })
       .catch(err => {
@@ -51,7 +56,6 @@ export default class home extends Component {
           <Products
             products={this.state.data}
             contributors={this.state.contributors}
-            images={this.state.gallery}
           />
         ) : (
           <Dimmer active inverted>

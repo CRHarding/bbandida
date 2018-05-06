@@ -21,6 +21,7 @@ export default class ProductSingle extends Component {
         contrib => contrib.id === contributor,
       );
     });
+    const product = this.props.product;
 
     return (
       <div>
@@ -28,7 +29,7 @@ export default class ProductSingle extends Component {
         <Grid centered columns={2}>
           <Grid.Row verticalAlign="middle">
             <Grid.Column>
-              <p>{this.props.product.description}</p>
+              <p>{product.description}</p>
 
               {contributors.map(contributor => {
                 return (
@@ -47,7 +48,7 @@ export default class ProductSingle extends Component {
               </Button>
               {this.state.show ? (
                 <EditPost
-                  product={this.props.product}
+                  product={product}
                   contributor={this.props.contributors}
                 />
               ) : (
@@ -55,8 +56,9 @@ export default class ProductSingle extends Component {
               )}
             </Grid.Column>
             <Grid.Column>
-              {this.props.images.map(image => {
-                return <Image src={image.secure_url} />;
+              <Image src={product.mainimage} />
+              {product.images.map(image => {
+                return <Image src={image} />;
               })}
             </Grid.Column>
           </Grid.Row>
