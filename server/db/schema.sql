@@ -21,7 +21,8 @@ CREATE TABLE contributor (
 
 CREATE TABLE products (
   id SERIAL PRIMARY KEY,
-  tag VARCHAR(255),
+  title VARCHAR(255),
+  tags VARCHAR(255),
   images VARCHAR(255) ARRAY,
   mainImage VARCHAR(255),
   description VARCHAR(255),

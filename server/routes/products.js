@@ -39,10 +39,12 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const productObject = {
     title: req.body.title,
+    tags: req.body.tags,
+    images: req.body.images,
+    mainImage: req.body.mainImage,
     description: req.body.description,
     contributors: req.body.contributors,
     price: req.body.price,
-    images: req.body.images,
   };
   console.log(productObject);
   if (productObject.contributors.length > 0) {

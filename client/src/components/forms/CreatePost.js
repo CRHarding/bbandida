@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Grid, Button, Menu, Segment } from 'semantic-ui-react';
+import { Form, Grid, Button, Menu, Segment, Image, Input, Label } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import Services from '../services/Services';
-import Image from 'react-image-resizer';
+// import Image from 'react-image-resizer';
 import AdminHeader from './AdminHeader';
 import { CloudinaryContext, Transformation } from 'cloudinary-react';
 
@@ -12,14 +12,16 @@ class CreatePost extends Component {
     this.state = {
       gallery: [],
       productImages: [],
-      dataLoaded: false,
+      tags: [],
       title: '',
       description: '',
+      url: '',
+      mainImage: '',
+      price: 0,
+      dataLoaded: false,
       titleSubmit: false,
       fireRedirect: false,
-      url: '',
       uploadMain: false,
-      mainImage: '',
       activeItem: 'edit',
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
@@ -49,10 +51,12 @@ class CreatePost extends Component {
     const product = {
       title: this.state.title,
       description: this.state.description,
+      tags: this.state.tags,
       contributors: [],
       images: this.state.productImages,
       mainImage: this.state.mainImage,
     };
+    console.log(product);
     Services.addProducts(product)
       .then(product => {
         console.log('successfuly added product-->', product);
@@ -77,8 +81,9 @@ class CreatePost extends Component {
         _this.setState({
           gallery: _this.state.gallery.concat(result),
           productImages: _this.state.productImages.concat(result[0].secure_url),
-          url: result.secure_url,
+          url: result[0].secure_url,
           dataLoaded: true,
+          tags: result[0].tags,
         });
       },
     );
@@ -93,12 +98,14 @@ class CreatePost extends Component {
         tags: [`${_this.state.title}`, 'main'],
       },
       function(error, result) {
+        console.log(result);
         _this.setState({
           gallery: _this.state.gallery.concat(result),
-          mainImage: result.public_id,
-          url: result.secure_url,
+          mainImage: result[0].secure_url,
+          url: result[0].secure_url,
           dataLoaded: true,
           uploadMain: true,
+          tags: result[0].tags,
         });
       },
     );
@@ -111,6 +118,12 @@ class CreatePost extends Component {
   editContent() {
     this.setState({
       contentSubmit: false,
+    });
+  }
+
+  editPrice(e) {
+    this.setState({
+      price: e.target.value,
     });
   }
 
@@ -130,6 +143,13 @@ class CreatePost extends Component {
               <Button onClick={this.editContent.bind(this)}>
                 Edit Content
               </Button>
+            </Menu.Item>
+            <Menu.Item
+              name="price"
+              active={activeItem === 'price'}
+              onClick={this.handleItemClick}
+            ><Input action={{ color: 'teal', labelPosition: 'left', icon: 'cart', content: 'Price' }} actionPosition='left' placeHolder 'Price' defaultValue='9.99'/>
+              <Button onClick={this.editPrice.bind(this)}>Add Price</Button>
             </Menu.Item>
             <Menu.Item
               name="add"
@@ -187,22 +207,36 @@ class CreatePost extends Component {
   renderImages() {
     console.log(this.state.gallery);
     return (
-      <Segment>
-        {this.state.gallery.map(data => {
-          return (
-            <div>
-              <Image src={data.secure_url} width={240} height={240} avatar />
-              {data.tags.includes('main') ? (<span>Main Image</span>) : ''}
-            </div>
-          );
-        })}
-        {this.state.dataLoaded ? this.renderSingleAdded() : ''}
-      </Segment>
+      <Grid.Column stretched width={12}>
+        <Segment>
+          {this.state.gallery.map(data => {
+            console.log(data.public_id, this.state.mainImage);
+            return (
+              <div>
+                <Image
+                  label={{
+                    as: 'a',
+                    corner: 'left',
+                    icon: `${
+                      data.secure_url === this.state.mainImage
+                        ? 'toggle on'
+                        : 'toggle off'
+                    }`,
+                  }}
+                  src={data.secure_url}
+                  size="medium"
+                  bordered
+                />
+              </div>
+            );
+          })}
+          {this.state.dataLoaded ? this.renderSingleAdded() : ''}
+        </Segment>
+      </Grid.Column>
     );
   }
 
   render() {
-    console.log(this.state.dataLoaded);
     return (
       <div>
         <AdminHeader />

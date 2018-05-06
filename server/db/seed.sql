@@ -38,7 +38,7 @@ INSERT INTO contributor (name, role, link) VALUES
     'damienmaloney.com'
   );
 
-  INSERT INTO products (tag, description, contributors, images, mainImage, price, number_sold) VALUES
+  INSERT INTO products (tags, description, contributors, images, mainImage, price, number_sold) VALUES
     (
       'rose-dress',
       'Dress: bb+ida, worsted wool, purple polyester, hand woven detail',
