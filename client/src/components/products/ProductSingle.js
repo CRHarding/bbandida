@@ -56,7 +56,7 @@ export default class ProductSingle extends Component {
             </Grid.Column>
             <Grid.Column>
               {this.props.images.map(image => {
-                return <Image src={image.secure_url} centered />;
+                return <Image src={image.secure_url} />;
               })}
             </Grid.Column>
           </Grid.Row>

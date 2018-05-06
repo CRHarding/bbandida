@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 const productsRouter = require('./routes/products');
 const usersRouter = require('./routes/users');
 const contributorRouter = require('./routes/contributors');
+const contactRouter = require('./routes/contact');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/products', productsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/contributors', contributorRouter);
+app.use('/api/send', contactRouter);
 
 app.get('/*', (req, res) => {
   res.json('MADE IT!');

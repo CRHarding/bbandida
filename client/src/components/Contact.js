@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './static/Header';
-import { Form, Container } from 'semantic-ui-react';
+import { Form, Container, Message } from 'semantic-ui-react';
+import Services from './services/Services';
 
 export default class Contact extends Component {
 	constructor() {
@@ -9,9 +10,27 @@ export default class Contact extends Component {
 			name: '',
 			email: '',
 			subject: '',
-			message: ''
+			message: '',
+			sent: false
 		}
 		this.handleChange = this.handleChange.bind(this)
+		this.emailSubmit = this.emailSubmit.bind(this)
+	}
+
+	emailSubmit(e) {
+		e.preventDefault()
+		const { name, email, subject, message } = this.state
+		Services.contactSubmit(this.state)
+			.then(contact => {
+				console.log('message sent', contact.data.msg)
+				if (contact.data.msg === 'success')
+					this.setState({
+						sent: true
+					})
+			})
+			.catch (err => {
+				console.log('error sending message', err)
+			})
 	}
 
 	handleChange(e) {
@@ -30,25 +49,31 @@ export default class Contact extends Component {
 			  <br />
 			  <Container>
 				  <h1>Contact Page</h1>
-				  <Form>
-				  	<Form.Input
-				  	  label="Name"
-				  	  name="Name"
-				  	  onChange={this.handleChange} />
-				  	<Form.Input
-				  	  label="Email"
-				  	  name="email"
-				  	  onChange={this.handleChange} />
-				  	<Form.Input
-				  	  label="Subject"
-				  	  name="subject"
-				  	  onChange={this.handleChange} />
-				  	<Form.Input
-				  	  label="Message"
-				  	  name="message"
-				  	  onChange={this.handleChange} />
-				  	<Form.Button primary>Send</Form.Button>
-				  </Form>
+				  {this.state.sent ?
+				    <Message success
+				      header='Form Sent'
+				      content='Reply will be sent in a timely manner, Thank You' />
+				  :
+					  <Form onSubmit={this.emailSubmit} success>
+					  	<Form.Input
+					  	  label="Name"
+					  	  name="Name"
+					  	  onChange={this.handleChange} />
+					  	<Form.Input
+					  	  type="email"
+					  	  label="Email"
+					  	  name="email"
+					  	  onChange={this.handleChange} />
+					  	<Form.Input
+					  	  label="Subject"
+					  	  name="subject"
+					  	  onChange={this.handleChange} />
+					  	<Form.Input
+					  	  label="Message"
+					  	  name="message"
+					  	  onChange={this.handleChange} />
+					  	<Form.Button primary>Send</Form.Button>
+					  </Form>}
 			  </Container>
 			</div>
 		)

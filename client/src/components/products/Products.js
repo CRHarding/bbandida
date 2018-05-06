@@ -75,15 +75,11 @@ export default class Products extends Component {
       <div>
         <h4>Main Products</h4>
         {this.state.click ? (
-          <Grid>
-            <Grid.Row columns={3}>
               <ProductSingle
                 product={this.state.currentProduct}
                 contributors={this.state.contributors}
                 images={this.state.images}
               />
-            </Grid.Row>
-          </Grid>
         ) : (
           ''
         )}

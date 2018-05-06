@@ -42,6 +42,14 @@ const Services = {
   editBlog(blog) {},
 
   deleteBlog(blog) {},
+
+  contactSubmit(contact) {
+    return axios({
+      method: 'POST',
+      url: '/api/send',
+      data: contact
+    })
+  }
 };
 
 export default Services;
