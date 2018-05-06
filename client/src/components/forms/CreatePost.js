@@ -31,6 +31,7 @@ class CreatePost extends Component {
       titleSubmit: false,
       fireRedirect: false,
       uploadMain: false,
+      priceLoaded: false,
       activeItem: 'edit',
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
@@ -136,6 +137,10 @@ class CreatePost extends Component {
     });
   }
 
+  renderPriceForm() {
+    this.setState({ priceLoaded: !this.state.priceLoaded });
+  }
+
   renderProductInformation() {
     const { activeItem } = this.state;
     return (
@@ -195,6 +200,7 @@ class CreatePost extends Component {
           </Menu>
         </Grid.Column>
         {this.state.dataLoaded ? this.renderImages() : ''}
+        {this.state.priceLoaded ? this.renderPriceForm() : ''}
       </Grid>
     );
   }
