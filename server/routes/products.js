@@ -67,10 +67,7 @@ router.post('/', (req, res) => {
 
 router.put('/edit', (req, res) => {
   const productObject = {
-<<<<<<< HEAD
     id: req.body.id,
-=======
->>>>>>> 2b7c1309c549b1bcbae9d463b5bc254dfc7fc4fb
     title: req.body.title,
     description: req.body.description,
     contributors: req.body.contributors,
