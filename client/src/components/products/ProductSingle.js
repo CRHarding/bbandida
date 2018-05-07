@@ -25,7 +25,11 @@ export default class ProductSingle extends Component {
         contrib => contrib.id === contributor,
       );
     });
+<<<<<<< HEAD
     console.log('this is single ', this.props)
+=======
+
+>>>>>>> b21181563a394464514c09b57b309fc6da0fd674
     const product = this.props.product;
 
     return (
@@ -35,11 +39,15 @@ export default class ProductSingle extends Component {
           <Grid.Row verticalAlign="middle">
             <Grid.Column>
               <p>
-                {this.props.product.title}
+                {product.title}
               </p>
               <p>
-                {this.props.product.description}
+                {product.description}
               </p>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b21181563a394464514c09b57b309fc6da0fd674
               {contributors.map(contributor => {
                 return (
                   <p>
@@ -51,7 +59,6 @@ export default class ProductSingle extends Component {
                   </p>
                 );
               })}
-              {/* thinking maybe we put edit here if logged in */}
               <Button primary onClick={this.showEdit}>
                 Edit
               </Button>
