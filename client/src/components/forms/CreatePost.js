@@ -106,9 +106,7 @@ class CreatePost extends Component {
       if (newMainImageState.length() === 1) {
         newMainImageState.pop();
       } else {
-        newMainImageState
-          .slice(0, index)
-          .concat(this.state.mainImage.slice(index + 1, this.state.mainImage.length));
+        newMainImageState.splice(1, index);
       }
 
       console.log(newMainImageState);
