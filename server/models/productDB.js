@@ -2,7 +2,7 @@ const productDB = require('../config/connection');
 
 module.exports = {
   getAllProducts() {
-    return productDB.any(`SELECT * FROM products`);
+    return productDB.any(`SELECT * FROM products ORDER BY id`);
   },
 
   addProduct(product) {
@@ -18,10 +18,9 @@ module.exports = {
   },
 
   editProduct(product) {
-    console.log(product);
     return productDB.one(
       `UPDATE products
-        SET images = $[images], mainImage = $[mainImage], description = $[description], price=$[price], number_sold = $[number_sold]
+        SET title = $[title], description = $[description], price=$[price], number_sold = $[number_sold]
                           WHERE id = $[id] RETURNING *`,
       product,
     );

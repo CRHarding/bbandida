@@ -65,8 +65,9 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/edit', (req, res) => {
+router.put('/edit', (req, res) => {
   const productObject = {
+    id: req.body.id,
     title: req.body.title,
     description: req.body.description,
     contributors: req.body.contributors,
@@ -78,10 +79,11 @@ router.post('/edit', (req, res) => {
   productController
     .editProduct(productObject)
     .then(responseProduct => {
+      console.log('edited in the backend')
       res.json({ product: responseProduct });
     })
     .catch(err => {
-      console.log(err);
+      console.log('error in the backend edit', err);
       res.status(400).json({ errors: err });
     });
 });
