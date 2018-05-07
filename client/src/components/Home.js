@@ -18,23 +18,17 @@ export default class home extends Component {
 
   componentDidMount() {
     Services.getProducts()
-<<<<<<< HEAD
-      .then(products => {
-        console.log('HOME Products -', products);
-=======
       .then(responseProducts => {
         console.log(responseProducts);
         const images = responseProducts.data.images;
         const mainImages = responseProducts.data.mainImages;
         let products = responseProducts.data.products;
-
         for (let i = 0; i < products.length; i++) {
           products[i].images = images[i];
           products[i].mainImages = mainImages[i];
         }
 
         console.log('HOME Products --->', products);
->>>>>>> 2b7c1309c549b1bcbae9d463b5bc254dfc7fc4fb
         this.setState({
           dataLoaded: true,
           data: products,

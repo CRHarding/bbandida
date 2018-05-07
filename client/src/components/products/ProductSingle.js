@@ -25,29 +25,21 @@ export default class ProductSingle extends Component {
         contrib => contrib.id === contributor,
       );
     });
-<<<<<<< HEAD
     console.log('this is single ', this.props)
-=======
     const product = this.props.product;
 
->>>>>>> 2b7c1309c549b1bcbae9d463b5bc254dfc7fc4fb
     return (
       <div>
         <h1>single view</h1>
         <Grid centered columns={2}>
           <Grid.Row verticalAlign="middle">
             <Grid.Column>
-<<<<<<< HEAD
               <p>
                 {this.props.product.title}
               </p>
               <p>
                 {this.props.product.description}
               </p>
-=======
-              <p>{product.description}</p>
->>>>>>> 2b7c1309c549b1bcbae9d463b5bc254dfc7fc4fb
-
               {contributors.map(contributor => {
                 return (
                   <p>
