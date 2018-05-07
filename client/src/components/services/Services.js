@@ -8,7 +8,7 @@ const Services = {
   getProducts() {
     return axios({
       method: 'GET',
-      url: '/api/products',
+      url: '/api/products'
     });
   },
 
@@ -16,12 +16,17 @@ const Services = {
     return axios({
       method: 'POST',
       url: '/api/products',
-      data: product,
+      data: product
     });
   },
 
   editProduct(product) {
-    console.log('This is services for editProduct', product);
+    console.log('This is services for editProduct', product)
+    return axios({
+      method: 'PUT',
+      url: 'api/products/edit',
+      data: product
+    })
   },
 
   deleteProduct(product) {},

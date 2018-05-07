@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
+import { Redirect } from 'react-router-dom';
 import Services from '../services/Services';
 
 export default class EditPostForm extends Component {
@@ -16,8 +17,16 @@ export default class EditPostForm extends Component {
 	}
 
 	submitEdit() {
-		console.log('Submitting Edit', this.state)
 		Services.editProduct(this.state)
+			.then(product => {
+				console.log('edited product', product)
+				this.setState({
+					fireRedirect: true
+				})
+			})
+			.catch(err => {
+				console.log('error editing product', err)
+			})
 	}
 
 	handleChange(e) {
@@ -45,7 +54,7 @@ export default class EditPostForm extends Component {
 	                fluid
 	                label="Title"
 	                name="title"
-	                placeholder={this.props.product.description}
+	                placeholder={this.props.product.title}
 	                value={this.state.title}
 	                onChange={this.handleChange}
 	              />
@@ -53,12 +62,12 @@ export default class EditPostForm extends Component {
 	                label="About"
 	                name="description"
 	                value={this.state.description}
-	                placeholder="edit this desription"
+	                placeholder={this.props.product.description}
 	                onChange={this.handleChange}
 	              />
 	              <Form.Button>Submit</Form.Button>
 	            </Form>
-	   
+	            {this.state.fireRedirect ? <Redirect to="/" /> : ''}
       	</div>
 		)
 	}

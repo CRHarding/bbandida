@@ -11,6 +11,10 @@ export default class ProductSingle extends Component {
     this.showEdit = this.showEdit.bind(this);
   }
 
+  componentDidUpdate() {
+    console.log('component did update')
+  }
+
   showEdit() {
     this.setState({ show: !this.state.show });
   }
@@ -21,14 +25,19 @@ export default class ProductSingle extends Component {
         contrib => contrib.id === contributor,
       );
     });
-
+    console.log('this is single ', this.props)
     return (
       <div>
         <h1>single view</h1>
         <Grid centered columns={2}>
           <Grid.Row verticalAlign="middle">
             <Grid.Column>
-              <p>{this.props.product.description}</p>
+              <p>
+                {this.props.product.title}
+              </p>
+              <p>
+                {this.props.product.description}
+              </p>
 
               {contributors.map(contributor => {
                 return (

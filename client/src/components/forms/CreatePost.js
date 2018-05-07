@@ -161,11 +161,9 @@ class CreatePost extends Component {
             <Menu.Item
               name="price"
               active={activeItem === 'price'}
-<<<<<<< HEAD
               onClick={this.handleItemClick} 
             >
             <Input action={{ color: 'teal', labelPosition: 'left', icon: 'cart', content: 'Price' }} actionPosition='left' placeHolder='Price' defaultValue='9.99'/>
-=======
               onClick={this.handleItemClick}
             >
               <Input
@@ -179,7 +177,6 @@ class CreatePost extends Component {
                 placeHolder="Price"
                 defaultValue="9.99"
               />
->>>>>>> f61b5f557b1dd02d95a1db099b641b0147ea383b
               <Button onClick={this.editPrice.bind(this)}>Add Price</Button>
             </Menu.Item>
             <Menu.Item
