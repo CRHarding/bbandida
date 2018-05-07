@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Services from '../services/Services';
-import Image from 'react-image-resizer';
-import { Dimmer, Loader } from 'semantic-ui-react';
+import { Dimmer, Loader, Grid, Image } from 'semantic-ui-react';
 
 class gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gallery: [],
       dataLoaded: false,
+      products: null,
+      images: null,
       url: '',
     };
     this.renderImages = this.renderImages.bind(this);
@@ -16,17 +16,22 @@ class gallery extends Component {
 
   componentDidMount() {
     Services.getProducts()
-      .then(products => {
-        const filterProduct = products.data.images.resources.filter(product => {
-          if (product.tags.length !== 0) {
-            return product;
-          }
-        });
+      .then(responseProducts => {
+        const images = responseProducts.data.images;
+        let products = responseProducts.data.products;
+        for (let i = 0; i < products.length; i++) {
+          products[i].images = images[i];
+        }
+
+        const flattenedImages = images.reduce(
+          (acc, current) => acc.concat(current),
+          [],
+        );
 
         this.setState({
           dataLoaded: true,
-          data: products.data.products,
-          gallery: filterProduct,
+          products: products,
+          images: flattenedImages,
         });
       })
       .catch(err => {
@@ -35,23 +40,17 @@ class gallery extends Component {
   }
 
   renderImages() {
+    const images = this.state.images;
     return (
-      <div className="ui centered three column grid">
-        {this.state.gallery.map(data => {
-          return (
-            <div className="column" key={data.public_id}>
-              <a
-                target="_blank"
-                href={`https://res.cloudinary.com/bbandida/image/upload/${
-                  data.public_id
-                }.jpg`}
-              >
-                <Image src={data.secure_url} width={240} height={240} />
-              </a>
-            </div>
-          );
-        })}
-      </div>
+      <Grid columns={12}>
+        <Grid.Row >
+          <Image.Group size="medium">
+            {images.map((image, key) => {
+              return <Image key={key} src={image} />;
+            })}
+          </Image.Group>
+        </Grid.Row>
+      </Grid>
     );
   }
 

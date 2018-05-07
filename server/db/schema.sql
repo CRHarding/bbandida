@@ -22,10 +22,10 @@ CREATE TABLE contributor (
 CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255),
-  images VARCHAR(255) ARRAY,
-  mainImage VARCHAR(255),
   description VARCHAR(255),
   contributors integer ARRAY,
+  images VARCHAR(255) ARRAY,
+  mainImage VARCHAR(255) ARRAY,
   price float default 0,
   number_sold integer default 0,
   date_created TIMESTAMP NOT NULL DEFAULT NOW()

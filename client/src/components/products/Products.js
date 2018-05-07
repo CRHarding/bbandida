@@ -12,12 +12,10 @@ export default class Products extends Component {
       currentProduct: null,
       contributors: this.props.contributors,
       product: this.props.product,
-      images: this.props.images,
     };
 
     this.showProducts = this.showProducts.bind(this);
     this.onClick = this.onClick.bind(this);
-    this.getImages = this.getImages.bind(this);
   }
 
   onClick(product) {
@@ -27,11 +25,9 @@ export default class Products extends Component {
     }
 
     if (this.state.currentProduct !== product) {
-      const productImages = this.getImages(product);
       smoothscroll.polyfill();
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
       this.setState({
-        images: productImages,
         currentProduct: product,
         click: true,
       });
@@ -42,22 +38,8 @@ export default class Products extends Component {
     }
   }
 
-  getImages(product) {
-    const productImages = this.props.images.map(image => {
-      if (image.tags.includes(product.tag)) {
-        return image;
-      }
-    });
-    return productImages.filter(image => {
-      if (image !== null) {
-        return image;
-      }
-    });
-  }
-
   showProducts() {
     return this.props.products.map(product => {
-      product.images = this.getImages(product);
       return (
         <Grid.Column>
           <Product
@@ -75,11 +57,10 @@ export default class Products extends Component {
       <div>
         <h4>Main Products</h4>
         {this.state.click ? (
-              <ProductSingle
-                product={this.state.currentProduct}
-                contributors={this.state.contributors}
-                images={this.state.images}
-              />
+          <ProductSingle
+            product={this.state.currentProduct}
+            contributors={this.state.contributors}
+          />
         ) : (
           ''
         )}

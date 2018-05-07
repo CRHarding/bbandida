@@ -7,13 +7,10 @@ import {
   Segment,
   Image,
   Input,
-  Label,
 } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import Services from '../services/Services';
-// import Image from 'react-image-resizer';
 import AdminHeader from './AdminHeader';
-import { CloudinaryContext, Transformation } from 'cloudinary-react';
 
 class CreatePost extends Component {
   constructor(props) {
@@ -25,7 +22,7 @@ class CreatePost extends Component {
       title: '',
       description: '',
       url: '',
-      mainImage: '',
+      mainImage: [],
       price: 0,
       dataLoaded: false,
       titleSubmit: false,
@@ -38,6 +35,7 @@ class CreatePost extends Component {
     this.uploadWidget = this.uploadWidget.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
+    this.handleToggleMainClick = this.handleToggleMainClick.bind(this);
   }
 
   handleChange(e) {
@@ -49,7 +47,6 @@ class CreatePost extends Component {
   }
 
   handleCreateSubmit() {
-    const { title, description } = this.state;
     this.setState({
       contentSubmit: true,
     });
@@ -85,7 +82,7 @@ class CreatePost extends Component {
       {
         cloud_name: 'bbandida',
         upload_preset: 'q0zswxx7',
-        tags: `${_this.state.title}`,
+        tags: 'photos',
       },
       function(error, result) {
         _this.setState({
@@ -99,26 +96,28 @@ class CreatePost extends Component {
     );
   }
 
-  addMainUploadWidget(image) {
-    let _this = this;
-    window.cloudinary.openUploadWidget(
-      {
-        cloud_name: 'bbandida',
-        upload_preset: 'q0zswxx7',
-        tags: [`${_this.state.title}`, 'main'],
-      },
-      function(error, result) {
-        console.log(result);
-        _this.setState({
-          gallery: _this.state.gallery.concat(result),
-          mainImage: result[0].secure_url,
-          url: result[0].secure_url,
-          dataLoaded: true,
-          uploadMain: true,
-          tags: result[0].tags,
-        });
-      },
-    );
+  handleToggleMainClick(image) {
+    console.log(image);
+    console.log(this.state.mainImage);
+    let newMainImageState = [];
+    if (this.state.mainImage.includes(image.secure_url)) {
+      const index = this.state.mainImage.indexOf(image.secure_url);
+      newMainImageState = this.state.mainImage;
+      if (newMainImageState.length() === 1) {
+        newMainImageState.pop();
+      } else {
+        newMainImageState
+          .slice(0, index)
+          .concat(this.state.mainImage.slice(index + 1, this.state.mainImage.length));
+      }
+
+      console.log(newMainImageState);
+    } else {
+      newMainImageState = this.state.mainImage;
+      newMainImageState.push(image.secure_url);
+    }
+
+    this.setState({ mainImage: newMainImageState });
   }
 
   renderSingleAdded() {
@@ -133,12 +132,24 @@ class CreatePost extends Component {
 
   editPrice(e) {
     this.setState({
-      price: e.target.value,
+      priceLoaded: !this.state.priceLoaded,
     });
   }
 
   renderPriceForm() {
-    this.setState({ priceLoaded: !this.state.priceLoaded });
+    return (
+      <Input
+        action={{
+          color: 'teal',
+          labelPosition: 'left',
+          icon: 'cart',
+          content: 'Price',
+        }}
+        actionPosition="left"
+        placeholder="Price"
+        defaultValue="9.99"
+      />
+    );
   }
 
   renderProductInformation() {
@@ -161,6 +172,7 @@ class CreatePost extends Component {
             <Menu.Item
               name="price"
               active={activeItem === 'price'}
+<<<<<<< HEAD
               onClick={this.handleItemClick} 
             >
             <Input action={{ color: 'teal', labelPosition: 'left', icon: 'cart', content: 'Price' }} actionPosition='left' placeHolder='Price' defaultValue='9.99'/>
@@ -177,6 +189,10 @@ class CreatePost extends Component {
                 placeHolder="Price"
                 defaultValue="9.99"
               />
+=======
+              onClick={this.handleItemClick}
+            >
+>>>>>>> 2b7c1309c549b1bcbae9d463b5bc254dfc7fc4fb
               <Button onClick={this.editPrice.bind(this)}>Add Price</Button>
             </Menu.Item>
             <Menu.Item
@@ -186,19 +202,6 @@ class CreatePost extends Component {
             >
               <Button onClick={this.uploadWidget.bind(this)}>Add Image</Button>
             </Menu.Item>
-            {this.state.uploadMain ? (
-              ''
-            ) : (
-              <Menu.Item
-                name="addMain"
-                active={activeItem === 'addMain'}
-                onClick={this.handleItemClick}
-              >
-                <Button onClick={this.addMainUploadWidget.bind(this)}>
-                  Add Main Image
-                </Button>
-              </Menu.Item>
-            )}
             <Button onClick={this.sendFormToDatabase.bind(this)}>Finish</Button>
           </Menu>
         </Grid.Column>
@@ -234,12 +237,10 @@ class CreatePost extends Component {
   }
 
   renderImages() {
-    console.log(this.state.gallery);
     return (
       <Grid.Column stretched width={12}>
         <Segment>
           {this.state.gallery.map(data => {
-            console.log(data.public_id, this.state.mainImage);
             return (
               <div>
                 <Image
@@ -255,6 +256,7 @@ class CreatePost extends Component {
                   src={data.secure_url}
                   size="medium"
                   bordered
+                  onClick={() => this.handleToggleMainClick(data)}
                 />
               </div>
             );

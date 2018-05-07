@@ -17,19 +17,13 @@ router.get('/', (req, res) => {
   productController
     .getAllProducts()
     .then(products => {
-      let result = [];
-      let options = { max_results: 500, tags: 'true' };
-      cloudinary.v2.api.resources(options, function(error, response) {
-        while (response.hasOwnProperty('next_cursor')) {
-          console.log(products, response);
-          result.concat(response);
-          cloudinary.v2.api.resources(options, function(error, response) {
-            result.concat(response);
-          });
-        }
-
-        res.json({ products: products, images: response });
+      let images = [];
+      let mainImages = [];
+      products.forEach(product => {
+        images.push(product.images);
+        mainImages.push(product.mainimage);
       });
+      res.json({ products: products, images: images, mainImages: mainImages });
     })
     .catch(err => {
       res.status(400).json({ errors: err });
@@ -39,14 +33,13 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const productObject = {
     title: req.body.title,
-    tags: req.body.tags,
-    images: req.body.images,
-    mainImage: req.body.mainImage,
     description: req.body.description,
     contributors: req.body.contributors,
+    images: req.body.images,
+    mainImage: req.body.mainImage,
     price: req.body.price,
+    number_sold: req.body.numberSold,
   };
-  console.log(productObject);
   if (productObject.contributors.length > 0) {
     productObject.contributors.map(contributor => {
       contributorController
@@ -74,12 +67,17 @@ router.post('/', (req, res) => {
 
 router.put('/edit', (req, res) => {
   const productObject = {
+<<<<<<< HEAD
     id: req.body.id,
+=======
+>>>>>>> 2b7c1309c549b1bcbae9d463b5bc254dfc7fc4fb
     title: req.body.title,
     description: req.body.description,
     contributors: req.body.contributors,
+    images: req.body.images,
+    mainImage: req.body.mainImage,
     price: req.body.price,
-    number_sold: req.number_sold,
+    number_sold: req.body.numberSold,
   };
   productController
     .editProduct(productObject)
