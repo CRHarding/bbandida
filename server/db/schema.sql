@@ -25,7 +25,7 @@ CREATE TABLE products (
   description VARCHAR(255),
   contributors integer ARRAY,
   images VARCHAR(255) ARRAY,
-  mainImage VARCHAR(255),
+  mainImage VARCHAR(255) ARRAY,
   price float default 0,
   number_sold integer default 0,
   date_created TIMESTAMP NOT NULL DEFAULT NOW()

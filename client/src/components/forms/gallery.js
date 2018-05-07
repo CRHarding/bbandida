@@ -45,8 +45,8 @@ class gallery extends Component {
       <Grid columns={12}>
         <Grid.Row >
           <Image.Group size="medium">
-            {images.map(image => {
-              return <Image src={image} />;
+            {images.map((image, key) => {
+              return <Image key={key} src={image} />;
             })}
           </Image.Group>
         </Grid.Row>

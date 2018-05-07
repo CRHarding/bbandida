@@ -19,10 +19,14 @@ export default class home extends Component {
   componentDidMount() {
     Services.getProducts()
       .then(responseProducts => {
+        console.log(responseProducts);
         const images = responseProducts.data.images;
+        const mainImages = responseProducts.data.mainImages;
         let products = responseProducts.data.products;
+
         for (let i = 0; i < products.length; i++) {
           products[i].images = images[i];
+          products[i].mainImages = mainImages[i];
         }
 
         console.log('HOME Products --->', products);

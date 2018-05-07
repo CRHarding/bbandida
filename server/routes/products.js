@@ -18,10 +18,12 @@ router.get('/', (req, res) => {
     .getAllProducts()
     .then(products => {
       let images = [];
+      let mainImages = [];
       products.forEach(product => {
-        images.push(product.images)
+        images.push(product.images);
+        mainImages.push(product.mainimage);
       });
-      res.json({ products: products, images: images });
+      res.json({ products: products, images: images, mainImages: mainImages });
     })
     .catch(err => {
       res.status(400).json({ errors: err });
