@@ -26,10 +26,10 @@ export default class Products extends Component {
 
     console.log(this.state.currentProduct, product);
 
-    if (this.state.click && this.state.currentProduct !== product) {
-      smoothscroll.polyfill();
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-    }
+    // if (this.state.click && this.state.currentProduct !== product) {
+    //   smoothscroll.polyfill();
+    //   window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    // }
 
     if (!this.state.currentProduct) {
       smoothscroll.polyfill();

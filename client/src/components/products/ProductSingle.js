@@ -7,16 +7,21 @@ export default class ProductSingle extends Component {
     super(props);
     this.state = {
       show: false,
+      product: this.props.product,
     };
     this.showEdit = this.showEdit.bind(this);
-  }
-
-  componentDidUpdate() {
-    console.log('component did update')
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   showEdit() {
     this.setState({ show: !this.state.show });
+  }
+
+  handleEditClick(product) {
+    this.setState({
+      product: product,
+      show: !this.state.show,
+    });
   }
 
   render() {
@@ -26,7 +31,7 @@ export default class ProductSingle extends Component {
       );
     });
 
-    const product = this.props.product;
+    const product = this.state.product;
 
     return (
       <div>
@@ -34,12 +39,8 @@ export default class ProductSingle extends Component {
         <Grid centered columns={2}>
           <Grid.Row verticalAlign="middle">
             <Grid.Column>
-              <p>
-                {product.title}
-              </p>
-              <p>
-                {product.description}
-              </p>
+              <p>{product.title}</p>
+              <p>{product.description}</p>
 
               {contributors.map(contributor => {
                 return (
@@ -59,6 +60,7 @@ export default class ProductSingle extends Component {
                 <EditPost
                   product={product}
                   contributor={this.props.contributors}
+                  onClick={this.handleEditClick}
                 />
               ) : (
                 ''

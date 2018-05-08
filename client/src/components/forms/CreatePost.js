@@ -23,19 +23,22 @@ class CreatePost extends Component {
       description: '',
       url: '',
       mainImage: [],
-      price: 0,
+      price: 9.99,
       dataLoaded: false,
       titleSubmit: false,
       fireRedirect: false,
       uploadMain: false,
       priceLoaded: false,
       activeItem: 'edit',
+      contentSubmit: true,
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
     this.handleToggleMainClick = this.handleToggleMainClick.bind(this);
+    this.updatePrice = this.updatePrice.bind(this);
+    this.setPrice = this.setPrice.bind(this);
   }
 
   handleChange(e) {
@@ -48,7 +51,9 @@ class CreatePost extends Component {
 
   handleCreateSubmit() {
     this.setState({
-      contentSubmit: true,
+      title: this.state.title,
+      description: this.state.description,
+      contentSubmit: !this.state.contentSubmit,
     });
   }
 
@@ -66,7 +71,6 @@ class CreatePost extends Component {
     console.log(product);
     Services.addProducts(product)
       .then(product => {
-        console.log('successfuly added product-->', product);
         this.setState({
           fireRedirect: true,
         });
@@ -91,30 +95,33 @@ class CreatePost extends Component {
           url: result[0].secure_url,
           dataLoaded: true,
           tags: result[0].tags,
+          contentSubmit: false,
+          priceLoaded: false,
         });
       },
     );
   }
 
   handleToggleMainClick(image) {
-    console.log(image);
-    console.log(this.state.mainImage);
     let newMainImageState = [];
+
     if (this.state.mainImage.includes(image.secure_url)) {
       const index = this.state.mainImage.indexOf(image.secure_url);
       newMainImageState = this.state.mainImage;
-      if (newMainImageState.length() === 1) {
+      console.log('before--->', newMainImageState);
+      if (newMainImageState.length === 1) {
         newMainImageState.pop();
+        console.log('.length === 1--->', newMainImageState);
       } else {
         newMainImageState.splice(1, index);
+        console.log('.splice--->', newMainImageState);
       }
-
-      console.log(newMainImageState);
     } else {
       newMainImageState = this.state.mainImage;
       newMainImageState.push(image.secure_url);
     }
 
+    console.log('after--->', newMainImageState);
     this.setState({ mainImage: newMainImageState });
   }
 
@@ -124,29 +131,48 @@ class CreatePost extends Component {
 
   editContent() {
     this.setState({
-      contentSubmit: false,
+      contentSubmit: !this.state.contentSubmit,
+      priceLoaded: false,
     });
   }
 
   editPrice(e) {
     this.setState({
       priceLoaded: !this.state.priceLoaded,
+      contentSubmit: false,
+      price: this.state.price,
+    });
+  }
+
+  updatePrice(e) {
+    console.log(e.target.value);
+    this.setState({
+      price: e.target.value,
+    });
+  }
+
+  setPrice(e) {
+    console.log(e.target.value);
+    this.setState({
+      price: this.state.price,
+      priceLoaded: false,
     });
   }
 
   renderPriceForm() {
     return (
-      <Input
-        action={{
-          color: 'teal',
-          labelPosition: 'left',
-          icon: 'cart',
-          content: 'Price',
-        }}
-        actionPosition="left"
-        placeholder="Price"
-        defaultValue="9.99"
-      />
+      <Grid.Column stretched width={12}>
+        <Segment>
+          <Form>
+            <Input
+              type="number"
+              defaultValue="9.99"
+              onChange={this.updatePrice}
+            />
+          </Form>
+          <Form.Button onClick={this.setPrice}>Edit Price</Form.Button>
+        </Segment>
+      </Grid.Column>
     );
   }
 
@@ -155,8 +181,9 @@ class CreatePost extends Component {
     return (
       <Grid>
         <Grid.Column width={4}>
-          <h1>{this.state.title}</h1>
-          <h4>{this.state.description}</h4>
+          <h1>{this.state.title ? this.state.title : ''}</h1>
+          <h4>{this.state.description ? this.state.description : ''}</h4>
+          <h4>{this.state.price ? `$${this.state.price}` : ''}</h4>
           <Menu fluid vertical tabular>
             <Menu.Item
               name="edit"
@@ -184,34 +211,41 @@ class CreatePost extends Component {
             <Button onClick={this.sendFormToDatabase.bind(this)}>Finish</Button>
           </Menu>
         </Grid.Column>
-        {this.state.dataLoaded ? this.renderImages() : ''}
+        {this.state.dataLoaded &&
+        !this.state.contentSubmit &&
+        !this.state.priceLoaded
+          ? this.renderImages()
+          : ''}
         {this.state.priceLoaded ? this.renderPriceForm() : ''}
+        {this.state.contentSubmit ? this.renderCreateForm() : ''}
       </Grid>
     );
   }
 
   renderCreateForm() {
     return (
-      <div>
-        <Form onSubmit={this.handleCreateSubmit}>
-          <Form.Input
-            fluid
-            label="Please enter a name for this post..."
-            name="title"
-            placeholder="Name"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-          <Form.TextArea
-            label="About"
-            name="description"
-            value={this.state.description}
-            placeholder="Tell us about this..."
-            onChange={this.handleChange}
-          />
-          <Form.Button>Submit</Form.Button>
-        </Form>
-      </div>
+      <Grid.Column stretched width={12}>
+        <Segment>
+          <Form onSubmit={this.handleCreateSubmit}>
+            <Form.Input
+              fluid
+              label="Please enter a name for this post..."
+              name="title"
+              placeholder="Name"
+              value={this.state.title}
+              onChange={this.handleChange}
+            />
+            <Form.TextArea
+              label="About"
+              name="description"
+              value={this.state.description}
+              placeholder="Tell us about this..."
+              onChange={this.handleChange}
+            />
+            <Form.Button>Submit</Form.Button>
+          </Form>
+        </Segment>
+      </Grid.Column>
     );
   }
 
@@ -220,6 +254,7 @@ class CreatePost extends Component {
       <Grid.Column stretched width={12}>
         <Segment>
           {this.state.gallery.map(data => {
+            console.log(data.secure_url, this.state.mainImage);
             return (
               <div>
                 <Image
@@ -227,7 +262,7 @@ class CreatePost extends Component {
                     as: 'a',
                     corner: 'left',
                     icon: `${
-                      data.secure_url === this.state.mainImage
+                      this.state.mainImage.includes(data.secure_url)
                         ? 'toggle on'
                         : 'toggle off'
                     }`,
@@ -252,9 +287,7 @@ class CreatePost extends Component {
         <AdminHeader />
         <br />
         <br />
-        {this.state.contentSubmit
-          ? this.renderProductInformation()
-          : this.renderCreateForm()}
+        {this.renderProductInformation()}
         {this.state.fireRedirect && <Redirect to={'/admin'} />}
       </div>
     );
