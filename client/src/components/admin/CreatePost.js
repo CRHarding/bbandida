@@ -6,13 +6,12 @@ import {
   Menu,
   Segment,
   Image,
-  Input,
 } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import Services from '../services/Services';
 import AdminHeader from './AdminHeader';
-import PriceForm from './PriceForm';
-import CreateForm from './CreateForm';
+import PriceForm from '../forms/PriceForm';
+import CreateForm from '../forms/CreateForm';
 
 class CreatePost extends Component {
   constructor(props) {
@@ -27,9 +26,7 @@ class CreatePost extends Component {
       mainImage: [],
       price: 9.99,
       dataLoaded: false,
-      titleSubmit: false,
       fireRedirect: false,
-      uploadMain: false,
       priceLoaded: false,
       activeItem: 'edit',
       contentSubmit: true,

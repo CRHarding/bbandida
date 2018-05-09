@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Image, Button } from 'semantic-ui-react';
-import EditPost from '../forms/EditPost';
+import EditPost from '../admin/EditPost';
 
 export default class ProductSingle extends Component {
   constructor(props) {
