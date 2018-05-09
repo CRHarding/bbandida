@@ -31,8 +31,8 @@ export default class ProductSingle extends Component {
       );
     });
 
-    const product = this.state.product;
-
+    const product = this.props.product;
+    console.log(product, this.props.product);
     return (
       <div>
         <h1>single view</h1>
