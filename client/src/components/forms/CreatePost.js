@@ -12,6 +12,7 @@ import { Redirect } from 'react-router';
 import Services from '../services/Services';
 import AdminHeader from './AdminHeader';
 import PriceForm from './PriceForm';
+import CreateForm from './CreateForm';
 
 class CreatePost extends Component {
   constructor(props) {
@@ -35,26 +36,9 @@ class CreatePost extends Component {
     };
     this.renderSingleAdded = this.renderSingleAdded.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
     this.handleToggleMainClick = this.handleToggleMainClick.bind(this);
     this.setPrice = this.setPrice.bind(this);
-  }
-
-  handleChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  handleCreateSubmit() {
-    this.setState({
-      title: this.state.title,
-      description: this.state.description,
-      contentSubmit: !this.state.contentSubmit,
-    });
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -129,6 +113,14 @@ class CreatePost extends Component {
     return <Image publicId={this.state.url} />;
   }
 
+  handleCreateSubmit(title, description) {
+    this.setState({
+      title: title,
+      description: description,
+      contentSubmit: !this.state.contentSubmit,
+    });
+  }
+
   editContent() {
     this.setState({
       contentSubmit: !this.state.contentSubmit,
@@ -193,39 +185,20 @@ class CreatePost extends Component {
           ? this.renderImages()
           : ''}
         {this.state.priceLoaded ? (
-          <PriceForm onClick={(price) => this.setPrice(price)} />
+          <PriceForm onClick={price => this.setPrice(price)} />
         ) : (
           ''
         )}
-        {this.state.contentSubmit ? this.renderCreateForm() : ''}
+        {this.state.contentSubmit ? (
+          <CreateForm
+            handleCreateSubmit={(title, description) =>
+              this.handleCreateSubmit(title, description)
+            }
+          />
+        ) : (
+          ''
+        )}
       </Grid>
-    );
-  }
-
-  renderCreateForm() {
-    return (
-      <Grid.Column stretched width={12}>
-        <Segment>
-          <Form onSubmit={this.handleCreateSubmit}>
-            <Form.Input
-              fluid
-              label="Please enter a name for this post..."
-              name="title"
-              placeholder="Name"
-              value={this.state.title}
-              onChange={this.handleChange}
-            />
-            <Form.TextArea
-              label="About"
-              name="description"
-              value={this.state.description}
-              placeholder="Tell us about this..."
-              onChange={this.handleChange}
-            />
-            <Form.Button>Submit</Form.Button>
-          </Form>
-        </Segment>
-      </Grid.Column>
     );
   }
 
