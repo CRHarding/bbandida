@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Grid, Button, Segment, Input } from 'semantic-ui-react';
+import { Form, Grid, Segment } from 'semantic-ui-react';
 
 class CreateForm extends Component {
   constructor(props) {

@@ -1,40 +1,25 @@
 import React, { Component } from 'react';
-import {
-  Form,
-  Grid,
-  Button,
-  Menu,
-  Segment,
-  Image,
-} from 'semantic-ui-react';
+import { Grid, Button, Menu } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import Services from '../services/Services';
 import AdminHeader from './AdminHeader';
 import PriceForm from '../forms/PriceForm';
 import CreateForm from '../forms/CreateForm';
+import RenderImages from './RenderImages';
 
 class CreatePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gallery: [],
-      productImages: [],
-      tags: [],
       title: '',
       description: '',
-      url: '',
-      mainImage: [],
       price: 9.99,
-      dataLoaded: false,
       fireRedirect: false,
       priceLoaded: false,
       activeItem: 'edit',
       contentSubmit: true,
     };
-    this.renderSingleAdded = this.renderSingleAdded.bind(this);
-    this.uploadWidget = this.uploadWidget.bind(this);
     this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
-    this.handleToggleMainClick = this.handleToggleMainClick.bind(this);
     this.setPrice = this.setPrice.bind(this);
   }
 
@@ -61,6 +46,36 @@ class CreatePost extends Component {
       });
   }
 
+  handleCreateSubmit(title, description) {
+    this.setState({
+      title: title,
+      description: description,
+      contentSubmit: !this.state.contentSubmit,
+    });
+  }
+
+  editContent() {
+    this.setState({
+      contentSubmit: !this.state.contentSubmit,
+      priceLoaded: false,
+    });
+  }
+
+  editPrice(e) {
+    this.setState({
+      priceLoaded: !this.state.priceLoaded,
+      contentSubmit: false,
+    });
+  }
+
+  setPrice(price) {
+    console.log(price);
+    this.setState({
+      price: price,
+      priceLoaded: false,
+    });
+  }
+
   uploadWidget() {
     let _this = this;
     window.cloudinary.openUploadWidget(
@@ -81,64 +96,6 @@ class CreatePost extends Component {
         });
       },
     );
-  }
-
-  handleToggleMainClick(image) {
-    let newMainImageState = [];
-
-    if (this.state.mainImage.includes(image.secure_url)) {
-      const index = this.state.mainImage.indexOf(image.secure_url);
-      newMainImageState = this.state.mainImage;
-      console.log('before--->', newMainImageState);
-      if (newMainImageState.length === 1) {
-        newMainImageState.pop();
-        console.log('.length === 1--->', newMainImageState);
-      } else {
-        newMainImageState.splice(1, index);
-        console.log('.splice--->', newMainImageState);
-      }
-    } else {
-      newMainImageState = this.state.mainImage;
-      newMainImageState.push(image.secure_url);
-    }
-
-    console.log('after--->', newMainImageState);
-    this.setState({ mainImage: newMainImageState });
-  }
-
-  renderSingleAdded() {
-    return <Image publicId={this.state.url} />;
-  }
-
-  handleCreateSubmit(title, description) {
-    this.setState({
-      title: title,
-      description: description,
-      contentSubmit: !this.state.contentSubmit,
-    });
-  }
-
-  editContent() {
-    this.setState({
-      contentSubmit: !this.state.contentSubmit,
-      priceLoaded: false,
-    });
-  }
-
-  editPrice(e) {
-    this.setState({
-      priceLoaded: !this.state.priceLoaded,
-      contentSubmit: false,
-      price: this.state.price,
-    });
-  }
-
-  setPrice(price) {
-    console.log(price);
-    this.setState({
-      price: price,
-      priceLoaded: false,
-    });
   }
 
   renderProductInformation() {
@@ -173,14 +130,21 @@ class CreatePost extends Component {
             >
               <Button onClick={this.uploadWidget.bind(this)}>Add Image</Button>
             </Menu.Item>
-            <Button onClick={this.sendFormToDatabase.bind(this)}>Finish</Button>
+            <Button onClick={this.sendFormToDatabase.bind(this)}>
+              Add Item
+            </Button>
           </Menu>
         </Grid.Column>
         {this.state.dataLoaded &&
         !this.state.contentSubmit &&
-        !this.state.priceLoaded
-          ? this.renderImages()
-          : ''}
+        !this.state.priceLoaded ? (
+          <RenderImages
+            gallery={this.state.gallery}
+            dataLoaded={this.state.dataLoaded}
+          />
+        ) : (
+          ''
+        )}
         {this.state.priceLoaded ? (
           <PriceForm onClick={price => this.setPrice(price)} />
         ) : (
@@ -196,38 +160,6 @@ class CreatePost extends Component {
           ''
         )}
       </Grid>
-    );
-  }
-
-  renderImages() {
-    return (
-      <Grid.Column stretched width={12}>
-        <Segment>
-          {this.state.gallery.map(data => {
-            console.log(data.secure_url, this.state.mainImage);
-            return (
-              <div>
-                <Image
-                  label={{
-                    as: 'a',
-                    corner: 'left',
-                    icon: `${
-                      this.state.mainImage.includes(data.secure_url)
-                        ? 'toggle on'
-                        : 'toggle off'
-                    }`,
-                  }}
-                  src={data.secure_url}
-                  size="medium"
-                  bordered
-                  onClick={() => this.handleToggleMainClick(data)}
-                />
-              </div>
-            );
-          })}
-          {this.state.dataLoaded ? this.renderSingleAdded() : ''}
-        </Segment>
-      </Grid.Column>
     );
   }
 

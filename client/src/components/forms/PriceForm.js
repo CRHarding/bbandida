@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Grid, Button, Segment, Input } from 'semantic-ui-react';
+import { Form, Grid, Segment, Input } from 'semantic-ui-react';
 
 class PriceForm extends Component {
   constructor(props) {
