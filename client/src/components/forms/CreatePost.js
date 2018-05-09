@@ -11,6 +11,7 @@ import {
 import { Redirect } from 'react-router';
 import Services from '../services/Services';
 import AdminHeader from './AdminHeader';
+import PriceForm from './PriceForm';
 
 class CreatePost extends Component {
   constructor(props) {
@@ -37,7 +38,6 @@ class CreatePost extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
     this.handleToggleMainClick = this.handleToggleMainClick.bind(this);
-    this.updatePrice = this.updatePrice.bind(this);
     this.setPrice = this.setPrice.bind(this);
   }
 
@@ -144,36 +144,12 @@ class CreatePost extends Component {
     });
   }
 
-  updatePrice(e) {
-    console.log(e.target.value);
+  setPrice(price) {
+    console.log(price);
     this.setState({
-      price: e.target.value,
-    });
-  }
-
-  setPrice(e) {
-    console.log(e.target.value);
-    this.setState({
-      price: this.state.price,
+      price: price,
       priceLoaded: false,
     });
-  }
-
-  renderPriceForm() {
-    return (
-      <Grid.Column stretched width={12}>
-        <Segment>
-          <Form>
-            <Input
-              type="number"
-              defaultValue="9.99"
-              onChange={this.updatePrice}
-            />
-          </Form>
-          <Form.Button onClick={this.setPrice}>Edit Price</Form.Button>
-        </Segment>
-      </Grid.Column>
-    );
   }
 
   renderProductInformation() {
@@ -216,7 +192,11 @@ class CreatePost extends Component {
         !this.state.priceLoaded
           ? this.renderImages()
           : ''}
-        {this.state.priceLoaded ? this.renderPriceForm() : ''}
+        {this.state.priceLoaded ? (
+          <PriceForm onClick={(price) => this.setPrice(price)} />
+        ) : (
+          ''
+        )}
         {this.state.contentSubmit ? this.renderCreateForm() : ''}
       </Grid>
     );

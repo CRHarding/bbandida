@@ -25,7 +25,6 @@ export default class Products extends Component {
     }
 
     if (!this.state.currentProduct) {
-      console.log('!this.state.currentProduct');
       this.setState({
         currentProduct: product,
         click: !this.state.click,
@@ -33,7 +32,6 @@ export default class Products extends Component {
       smoothscroll.polyfill();
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     } else if (this.state.currentProduct !== product) {
-      console.log('this.state.currentProduct !== product', product);
       this.setState({
         currentProduct: product,
         click: true,
@@ -41,7 +39,6 @@ export default class Products extends Component {
       smoothscroll.polyfill();
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     } else {
-      console.log('final else');
       this.setState({
         click: !this.state.click,
       });
@@ -63,7 +60,6 @@ export default class Products extends Component {
   }
 
   render() {
-    console.log('render--->', this.state.currentProduct);
     return (
       <div>
         <h4>Main Products</h4>

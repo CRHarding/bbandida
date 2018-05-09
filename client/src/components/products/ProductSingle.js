@@ -7,7 +7,7 @@ export default class ProductSingle extends Component {
     super(props);
     this.state = {
       show: false,
-      product: this.props.product,
+      product: null,
     };
     this.showEdit = this.showEdit.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
@@ -32,7 +32,7 @@ export default class ProductSingle extends Component {
     });
 
     const product = this.props.product;
-    console.log(product, this.props.product);
+
     return (
       <div>
         <h1>single view</h1>
