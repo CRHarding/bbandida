@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Gallery from './gallery';
 import AdminHeader from './AdminHeader';
 
-class admin extends Component {
+export default class Admin extends Component {
   render() {
     return (
       <div>
@@ -17,5 +17,3 @@ class admin extends Component {
     );
   }
 }
-
-export default admin;

@@ -13,6 +13,14 @@ export default class Header extends React.Component {
     return (
       <Menu stackable>
         <Menu.Item
+          name="admin"
+          active={activeItem === 'admin'}
+          onClick={this.handleItemClick}
+          as={Link} to="/admin"
+        >
+          Admin Home
+        </Menu.Item>
+        <Menu.Item
           name="create"
           active={activeItem === 'create'}
           onClick={this.handleItemClick}
