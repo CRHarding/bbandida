@@ -3,16 +3,22 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import Services from './components/services/Services';
 import Home from './components/Home';
-import Admin from './components/forms/admin';
+import Admin from './components/admin/admin';
 import About from './components/About';
 import Blogs from './components/Blogs';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
+<<<<<<< HEAD
 import Edit from './components/Edit';
 import CreatePost from './components/forms/CreatePost';
 import NewBlog from './components/forms/NewBlog';
 import UpdateContact from './components/forms/UpdateContact';
 import UpdateAbout from './components/forms/UpdateAbout';
+=======
+import EditPost from './components/admin/EditPost';
+import CreatePost from './components/admin/CreatePost';
+import NewBlog from './components/admin/NewBlog';
+>>>>>>> 33ad2952738207490e873b4522456823f474e784
 
 export default class App extends Component {
   constructor() {
@@ -57,6 +63,7 @@ export default class App extends Component {
   }
   
   render() {
+<<<<<<< HEAD
     if (this.state.dataLoaded && this.state.cdataLoaded) {
       return (
         <Router>
@@ -86,5 +93,22 @@ export default class App extends Component {
                 <Loader inverted content='Loading' />
               </Dimmer>)
     }
+=======
+    return (
+      <Router>
+        <div>
+          <Route exact path = "/" component = {Home} />
+          <Route path = "/admin" component = {Admin} />
+          <Route path = "/about" component = {About} />
+          <Route path = "/contact" component = {Contact} />
+          <Route path = "/cart" component = {Cart} />
+          <Route path = "/blogs" component = {Blogs} />
+          <Route path = "/post/create" component = {CreatePost} />
+          <Route path = "/post/edit" component = {EditPost} />
+          <Route path = "/blog/new" component = {NewBlog} />
+        </div>
+      </Router>
+    );
+>>>>>>> 33ad2952738207490e873b4522456823f474e784
   }
 }
