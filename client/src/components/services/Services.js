@@ -24,7 +24,7 @@ const Services = {
     console.log('This is services for editProduct', product)
     return axios({
       method: 'PUT',
-      url: 'api/products/edit',
+      url: '/api/products/edit',
       data: product
     })
   },
