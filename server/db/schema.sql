@@ -30,3 +30,11 @@ CREATE TABLE products (
   number_sold integer default 0,
   date_created TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+CREATE TABLE blogs (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255),
+  content VARCHAR(255),
+  image VARCHAR(255) ARRAY,
+  date_created TIMESTAMP NOT NULL DEFAULT NOW()
+);

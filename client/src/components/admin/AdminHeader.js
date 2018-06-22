@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 
-export default class Header extends React.Component {
+class AdminHeader extends Component {
+  
   state = {};
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -66,3 +67,5 @@ export default class Header extends React.Component {
     );
   }
 }
+
+export default AdminHeader;
