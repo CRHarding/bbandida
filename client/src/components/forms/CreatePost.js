@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { Component } from 'react';
 // import {
 //   Form,
@@ -11,6 +12,21 @@
 // import { Redirect } from 'react-router';
 // import Services from '../services/Services';
 // import AdminHeader from './AdminHeader';
+=======
+import React, { Component } from 'react';
+import {
+  Form,
+  Grid,
+  Button,
+  Menu,
+  Segment,
+  Image,
+  Input,
+} from 'semantic-ui-react';
+import { Redirect } from 'react-router';
+import Services from '../services/Services';
+import AdminHeader from '../admin/AdminHeader';
+>>>>>>> e5d3462b07f2520300ef400fe768cabb4f992fa8
 
 // class CreatePost extends Component {
 //   constructor(props) {
@@ -150,6 +166,7 @@
 //     );
 //   }
 
+<<<<<<< HEAD
 //   renderProductInformation() {
 //     const { activeItem } = this.state;
 //     return (
@@ -205,6 +222,63 @@
 //       </Grid>
 //     );
 //   }
+=======
+  renderProductInformation() {
+    const { activeItem } = this.state;
+    return (
+      <Grid>
+        <Grid.Column width={4}>
+          <h1>{this.state.title}</h1>
+          <h4>{this.state.description}</h4>
+          <Menu fluid vertical tabular>
+            <Menu.Item
+              name="edit"
+              active={activeItem === 'edit'}
+              onClick={this.handleItemClick}
+            >
+              <Button onClick={this.editContent.bind(this)}>
+                Edit Content
+              </Button>
+            </Menu.Item>
+            <Menu.Item
+              name="price"
+              active={activeItem === 'price'}
+              onClick={this.handleItemClick}
+            >
+            <Input action={{ color: 'teal', labelPosition: 'left', icon: 'cart', content: 'Price' }} actionPosition='left' placeHolder='Price' defaultValue='9.99'/>
+              onClick={this.handleItemClick}
+            >
+              <Input
+                action={{
+                  color: 'teal',
+                  labelPosition: 'left',
+                  icon: 'cart',
+                  content: 'Price',
+                }}
+                actionPosition="left"
+                placeHolder="Price"
+                defaultValue="9.99"
+              />
+              onClick={this.handleItemClick}
+            >
+              <Button onClick={this.editPrice.bind(this)}>Add Price</Button>
+            </Menu.Item>
+            <Menu.Item
+              name="add"
+              active={activeItem === 'add'}
+              onClick={this.handleItemClick}
+            >
+              <Button onClick={this.uploadWidget.bind(this)}>Add Image</Button>
+            </Menu.Item>
+            <Button onClick={this.sendFormToDatabase.bind(this)}>Finish</Button>
+          </Menu>
+        </Grid.Column>
+        {this.state.dataLoaded ? this.renderImages() : ''}
+        {this.state.priceLoaded ? this.renderPriceForm() : ''}
+      </Grid>
+    );
+  }
+>>>>>>> e5d3462b07f2520300ef400fe768cabb4f992fa8
 
 //   renderCreateForm() {
 //     return (
