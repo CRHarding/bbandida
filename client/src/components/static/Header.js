@@ -1,43 +1,76 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Collapse,
+         Navbar,
+         NavbarToggler,
+         NavbarBrand,
+         Nav,
+         NavItem,
+         NavLink,
+         DropdownToggle,
+         DropdownMenu,
+         DropdownItem } from 'reactstrap';
 import logo from '../images/bbandida.jpeg';
 
-const Header = () => {
-  return (
-    <div className="header hoverable">
-      <nav className="white">
-        <div className="nav-wrapper">
-          <a href="/" className="brand-logo center">
-            <img src={logo} height="96" width="80" alt="logo" />
-          </a>
-          <ul id="nav-mobile" className="left hide-on-med-and-down">
-            <li>
-              <Link to="/about" className="blue-text">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="blue-text">
-                Contact
-              </Link>
-            </li>
-          </ul>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li>
-              <Link to="/blogs" className="blue-text">
-                Blogs
-              </Link>
-            </li>
-            <li>
-              <Link to="/cart" className="blue-text">
-                Cart
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  );
-};
+export default class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isOpen: false
+    }
+    this.toggle = this.toggle.bind(this);
+  }
 
-export default Header;
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+
+  render() {
+    return (
+      /*<Navbar className="navbar navbar-dark navbar-expand-md bg-dark justify-content-between">
+        <div className="container-fluid">
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <ul className="navbar-nav">
+                <li className="nav-item">
+                    <Link to="/about" className="nav-link text-primary" href="#">About</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/contact" className="nav-link text-primary" href="#">Contact</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/blogs" className="nav-link text-primary" href="#">Blogs</Link>
+                </li>
+            </ul>
+          </Collapse>
+        <Link to="/" className="navbar-brand mx-auto d-block center"><img src={logo} height="96" width="80" alt="logo" /></Link>
+            <ul className="nav navbar-nav ml-auto">
+                <li className="nav-item"><Link to="/" className="nav-link text-primary"><i className="fab fa-twitter"></i></Link></li>
+                <li className="nav-item"><Link to="/" className="nav-link text-primary"><i className="fab fa-github"></i></Link></li>
+            </ul>
+        </div>
+      </Navbar>*/
+      <Navbar color="light" light expand="md" fixed="top">
+        <NavbarBrand href="/" className="mx-auto">
+          <img src={logo} height="96" width="100" alt="logo" />
+        </NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <Link to="/about" className="nav-item text-primary">ABOUT</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/contact" className="nav-item text-primary">CONTACT</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/blogs" className="nav-item text-primary">BLOGS</Link>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    );
+  };
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './static/Header';
+import { Container } from 'reactstrap';
 
 export default class Blogs extends Component {
 
@@ -8,7 +9,11 @@ export default class Blogs extends Component {
 		return(
 			<div>
 				<Header />
-				<h1>Blog page</h1>
+				<br/>
+				<br/>
+				<Container>
+					<h1 className="blog">Blog</h1>
+				</Container>
 			</div>
 		)
 	}

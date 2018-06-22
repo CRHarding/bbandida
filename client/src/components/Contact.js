@@ -47,7 +47,8 @@ export default class Contact extends Component {
         <br />
         <br />
         <Container>
-          <h1>Contact Page</h1>
+          <h1 className="contact">Contact</h1>
+          <br/>
           {this.state.sent ? (
             <Message
               success
