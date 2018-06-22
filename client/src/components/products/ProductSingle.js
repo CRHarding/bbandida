@@ -11,6 +11,7 @@ export default class ProductSingle extends Component {
       product: this.props.product,
     };
     this.handleEditClick = this.handleEditClick.bind(this);
+    this.showEdit = this.showEdit.bind(this)
   }
 
   showEdit() {
@@ -64,9 +65,6 @@ export default class ProductSingle extends Component {
                     return <Image src={image} fluid />
                 })}
             </Grid.Column>
-              <Grid.Column>
-
-              </Grid.Column>
               <Button primary onClick={this.showEdit}>
                 Edit
               </Button>
