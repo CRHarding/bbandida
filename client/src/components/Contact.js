@@ -19,7 +19,6 @@ export default class Contact extends Component {
 
   emailSubmit(e) {
     e.preventDefault();
-    const { name, email, subject, message } = this.state;
     Services.contactSubmit(this.state)
       .then(contact => {
         console.log('message sent', contact.data.msg);

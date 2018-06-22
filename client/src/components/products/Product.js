@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { Image } from 'cloudinary-react';
+import { Col } from 'reactstrap';
 
 export default class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
       click: false,
+      product: props.product,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -14,16 +17,18 @@ export default class Product extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <img
-          src={this.props.product.mainimage}
-          onClick={() => this.handleClick(this.props.product)}
-          alt="img"
-          width={240}
-          height={240}
-        />
-      </div>
-    );
+    if (this.state.product.mainImages) {
+      return (
+        <Col xs="auto">
+          <Image
+            className="ResponsiveMainImages"
+            publicId={this.state.product.mainImages[0]}
+            onClick={() => this.handleClick(this.state.product)}
+          />
+        </Col>
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
