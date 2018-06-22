@@ -8,27 +8,22 @@ import About from './components/About';
 import Blogs from './components/Blogs';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
-<<<<<<< HEAD
 import Edit from './components/Edit';
 import CreatePost from './components/forms/CreatePost';
-import NewBlog from './components/forms/NewBlog';
-import UpdateContact from './components/forms/UpdateContact';
-import UpdateAbout from './components/forms/UpdateAbout';
-=======
-import EditPost from './components/admin/EditPost';
-import CreatePost from './components/admin/CreatePost';
 import NewBlog from './components/admin/NewBlog';
->>>>>>> 33ad2952738207490e873b4522456823f474e784
+// import UpdateContact from './components/forms/UpdateContact';
+// import UpdateAbout from './components/forms/UpdateAbout';
+import EditPost from './components/admin/EditPost';
 
 export default class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       dataLoaded: false,
       cdataLoaded: false,
       data: null,
-      contributors: null
-    }
+      contributors: null,
+    };
   }
 
   componentDidMount() {
@@ -61,54 +56,53 @@ export default class App extends Component {
         console.log('error in getting contributors');
       });
   }
-  
+
   render() {
-<<<<<<< HEAD
     if (this.state.dataLoaded && this.state.cdataLoaded) {
       return (
         <Router>
           <div>
-            <Route exact path = "/" component = {() => {
-              return <Home data={this.state.data}
-                           contributors={this.state.contributors} />
-            }} />
-            <Route path = "/admin" component = {Admin} />
-            <Route path = "/about" component = {About} />
-            <Route path = "/contact" component = {Contact} />
-            <Route path = "/cart" component = {Cart} />
-            <Route path = "/blogs" component = {Blogs} />
-            <Route path = "/post/create" component = {CreatePost} />
-            <Route path = "/post/edit" component = {() => {
-              return <Edit data={this.state.data}
-                           contributors={this.state.contributors} />
-            }} />
-            <Route path = "/blog/new" component = {NewBlog} />
-            <Route path = "/contact/update" component = {UpdateContact} />
-            <Route path = "/about/update" component = {UpdateAbout} />
+            <Route
+              exact
+              path="/"
+              component={() => {
+                return (
+                  <Home
+                    data={this.state.data}
+                    contributors={this.state.contributors}
+                  />
+                );
+              }}
+            />
+            <Route path="/admin" component={Admin} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/blogs" component={Blogs} />
+            <Route path="/post/create" component={CreatePost} />
+            <Route
+              path="/post/edit"
+              component={() => {
+                return (
+                  <Edit
+                    data={this.state.data}
+                    contributors={this.state.contributors}
+                  />
+                );
+              }}
+            />
+            <Route path="/blog/new" component={NewBlog} />
+            {/* <Route path="/contact/update" component={UpdateContact} /> */}
+            {/* <Route path="/about/update" component={UpdateAbout} /> */}
           </div>
         </Router>
       );
     } else {
-      return (<Dimmer active inverted>
-                <Loader inverted content='Loading' />
-              </Dimmer>)
+      return (
+        <Dimmer active inverted>
+          <Loader inverted content="Loading" />
+        </Dimmer>
+      );
     }
-=======
-    return (
-      <Router>
-        <div>
-          <Route exact path = "/" component = {Home} />
-          <Route path = "/admin" component = {Admin} />
-          <Route path = "/about" component = {About} />
-          <Route path = "/contact" component = {Contact} />
-          <Route path = "/cart" component = {Cart} />
-          <Route path = "/blogs" component = {Blogs} />
-          <Route path = "/post/create" component = {CreatePost} />
-          <Route path = "/post/edit" component = {EditPost} />
-          <Route path = "/blog/new" component = {NewBlog} />
-        </div>
-      </Router>
-    );
->>>>>>> 33ad2952738207490e873b4522456823f474e784
   }
 }

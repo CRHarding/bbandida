@@ -10,7 +10,7 @@ import {
 } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import Services from '../services/Services';
-import AdminHeader from './AdminHeader';
+import AdminHeader from '../admin/AdminHeader';
 
 class CreatePost extends Component {
   constructor(props) {
@@ -170,7 +170,7 @@ class CreatePost extends Component {
             <Menu.Item
               name="price"
               active={activeItem === 'price'}
-              onClick={this.handleItemClick} 
+              onClick={this.handleItemClick}
             >
             <Input action={{ color: 'teal', labelPosition: 'left', icon: 'cart', content: 'Price' }} actionPosition='left' placeHolder='Price' defaultValue='9.99'/>
               onClick={this.handleItemClick}
