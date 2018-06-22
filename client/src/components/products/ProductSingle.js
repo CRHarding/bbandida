@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { Grid, Image, Button } from 'semantic-ui-react';
+import { Row, Col } from 'reactstrap';
 
 import EditPost from '../admin/EditPost';
+import ProductCarousel from './ProductCarousel';
 
 export default class ProductSingle extends Component {
   constructor(props) {
     super(props);
     this.state = {
       show: false,
-      product: this.props.product,
     };
     this.handleEditClick = this.handleEditClick.bind(this);
-    this.showEdit = this.showEdit.bind(this)
+    this.showEdit = this.showEdit.bind(this);
   }
 
   showEdit() {
@@ -26,60 +26,51 @@ export default class ProductSingle extends Component {
   }
 
   render() {
-    console.log('this is single ', this.props);
-
     let contributors = this.props.product.contributors.map(contributor => {
       return this.props.contributors.filter(
         contrib => contrib.id === contributor,
       );
     });
-    const product = this.props.product;
-    return (
-      <div>
-        <h1>single view</h1>
-        <Grid centered columns={3}>
-          <Grid.Row verticalAlign="middle">
-            <Grid.Column className="description">
 
+    console.log(this.props.product);
+    
+    const product = this.props.product;
+    product.images.push(product.mainImages[0]);
+    return (
+      <Row>
+        <Col xs="auto">
+          <p>
+            {product.title}
+          </p>
+          <p>
+            {product.description}
+          </p>
+          {contributors.map(contributor => {
+            return (
               <p>
-                {product.title}
+                contributor: {contributor[0].name}
+                <br />
+                role: {contributor[0].role}
+                <br />
+                link: {contributor[0].link}
               </p>
-              <p>
-                {product.description}
-              </p>
-              {contributors.map(contributor => {
-                return (
-                  <p>
-                    contributor: {contributor[0].name}
-                    <br />
-                    role: {contributor[0].role}
-                    <br />
-                    link: {contributor[0].link}
-                  </p>
-                );
-              })}
-            </Grid.Column>
-            <Grid.Column>
-              <Image src={product.mainimage} fluid />
-                {product.images.map(image => {
-                    return <Image src={image} fluid />
-                })}
-            </Grid.Column>
-              <Button primary onClick={this.showEdit}>
-                Edit
-              </Button>
-              {this.state.show ? (
-                <EditPost
-                  product={product}
-                  contributors={this.props.contributors}
-                  onClick={this.handleEditClick}
-                />
-              ) : (
-                ''
-              )}
-          </Grid.Row>
-        </Grid>
-      </div>
+            );
+          })}
+          <ProductCarousel images={product.images}/>
+          {/* <Button color="primary" onClick={this.showEdit}>
+            Edit
+          </Button> */}
+          {this.state.show ? (
+            <EditPost
+              product={product}
+              contributors={this.props.contributors}
+              onClick={this.handleEditClick}
+            />
+          ) : (
+            ''
+          )}
+        </Col>
+      </Row>
     );
   }
 }

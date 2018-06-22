@@ -42,3 +42,29 @@ body {
     padding: 100px;
 
 }
+
+@media screen and (orientation: portrait) {
+  .carousel-item:empty { max-width: 90%; }
+}
+
+@media screen and (orientation: landscape) {
+  .carousel-item:empty { max-height: 90%; }
+}
+
+.carousel-item > img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  max-height: 100vh;
+}
+
+.ResponsiveMainImages {
+  max-width: 100%;
+  height: 350px;
+  width: 350px;
+  max-height: 100vh;
+}
+
+.carousel-control-prev,.carousel-control-next {
+  cursor:pointer;
+}

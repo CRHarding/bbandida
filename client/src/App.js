@@ -13,7 +13,7 @@ import CreatePost from './components/forms/CreatePost';
 import NewBlog from './components/admin/NewBlog';
 // import UpdateContact from './components/forms/UpdateContact';
 // import UpdateAbout from './components/forms/UpdateAbout';
-import EditPost from './components/admin/EditPost';
+// import EditPost from './components/admin/EditPost';
 
 export default class App extends Component {
   constructor() {

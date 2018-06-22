@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Form, Container, Image } from 'semantic-ui-react';
+import { Form, Image } from 'semantic-ui-react';
 import Services from '../services/Services';
 
 export default class EditPost extends Component {
@@ -45,11 +45,11 @@ export default class EditPost extends Component {
   }
 
   render() {
-    let contributors = this.props.product.contributors.map(contributor => {
-      return this.props.contributors.filter(
-        contrib => contrib.id === contributor,
-      );
-    });
+    // let contributors = this.props.product.contributors.map(contributor => {
+    //   return this.props.contributors.filter(
+    //     contrib => contrib.id === contributor,
+    //   );
+    // });
     const product = this.props.product;
     return (
       <div>

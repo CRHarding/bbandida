@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Grid } from 'semantic-ui-react';
-import Services from '../components/services/Services';
 import EditPost from './admin/EditPost';
 import ProductEdit from './admin/ProductEdit';
 import AdminHeader from './admin/AdminHeader';
