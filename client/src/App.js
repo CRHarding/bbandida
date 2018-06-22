@@ -8,18 +8,12 @@ import About from './components/About';
 import Blogs from './components/Blogs';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
-<<<<<<< HEAD
-import CreatePost from './components/admin/CreatePost';
-import Edit from './components/Edit';
-import NewBlog from './components/admin/NewBlog';
-=======
 import Edit from './components/Edit';
 import CreatePost from './components/forms/CreatePost';
 import NewBlog from './components/admin/NewBlog';
 // import UpdateContact from './components/forms/UpdateContact';
 // import UpdateAbout from './components/forms/UpdateAbout';
 import EditPost from './components/admin/EditPost';
->>>>>>> e5d3462b07f2520300ef400fe768cabb4f992fa8
 
 export default class App extends Component {
   constructor() {
@@ -68,23 +62,6 @@ export default class App extends Component {
       return (
         <Router>
           <div>
-<<<<<<< HEAD
-            <Route exact path = "/" component = {() => {
-              return <Home data={this.state.data}
-                           contributors={this.state.contributors} />
-            }} />
-            <Route path = "/admin" component = {Admin} />
-            <Route path = "/about" component = {About} />
-            <Route path = "/contact" component = {Contact} />
-            <Route path = "/cart" component = {Cart} />
-            <Route path = "/blogs" component = {Blogs} />
-            <Route path = "/post/create" component = {CreatePost} />
-            <Route path = "/post/edit" component = {() => {
-              return <Edit data={this.state.data}
-                           contributors={this.state.contributors} />
-            }} />
-            <Route path = "/blog/new" component = {NewBlog} />
-=======
             <Route
               exact
               path="/"
@@ -117,7 +94,6 @@ export default class App extends Component {
             <Route path="/blog/new" component={NewBlog} />
             {/* <Route path="/contact/update" component={UpdateContact} /> */}
             {/* <Route path="/about/update" component={UpdateAbout} /> */}
->>>>>>> e5d3462b07f2520300ef400fe768cabb4f992fa8
           </div>
         </Router>
       );
