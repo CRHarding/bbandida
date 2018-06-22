@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './static/Header';
 import Products from './products/Products';
 import { Dimmer, Loader } from 'semantic-ui-react';
+import { Container } from 'reactstrap';
 
 export default class home extends Component {
   constructor(props) {
@@ -51,17 +52,19 @@ export default class home extends Component {
     return (
       <div>
         <Header />
-        <h1>BB and IDA</h1>
-        {this.state.data ? (
-          <Products
-            products={this.state.data}
-            contributors={this.state.contributors}
-          />
-        ) : (
-          <Dimmer active inverted>
-            <Loader inverted content='Loading' />
-          </Dimmer>
-        )}
+        <Container align="center" center>
+          <h1>BB and IDA</h1>
+          {this.state.data ? (
+            <Products
+              products={this.state.data}
+              contributors={this.state.contributors}
+            />
+          ) : (
+            <Dimmer active inverted>
+              <Loader inverted content='Loading' />
+            </Dimmer>
+          )}
+        </Container>
       </div>
     );
   }

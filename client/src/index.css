@@ -8,3 +8,37 @@ body {
 .description {
 	position: fixed;
 }
+
+.nav-item {
+/*    font-size: 20px;
+    font-family: "Helvetica Neue",Helvetica,sans-serif;
+    font-weight: normal;
+    line-height: 1em;
+    padding: 10px;*/
+    font-family: "proxima-nova";
+    font-size: 16px;
+    line-height: 2em;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-weight: 400;
+    font-style: normal;
+    padding: 10px;
+}
+
+.container {
+	margin-top: 130px;
+}
+
+.contact .about .blog {
+    font-family: "proxima-nova";
+    line-height: 1.2em;
+    text-transform: none;
+    letter-spacing: 0px;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.aboutme {
+    padding: 100px;
+
+}

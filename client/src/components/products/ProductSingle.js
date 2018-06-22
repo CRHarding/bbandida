@@ -71,7 +71,7 @@ export default class ProductSingle extends Component {
               {this.state.show ? (
                 <EditPost
                   product={product}
-                  contributor={this.props.contributors}
+                  contributors={this.props.contributors}
                   onClick={this.handleEditClick}
                 />
               ) : (
