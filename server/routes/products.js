@@ -14,7 +14,6 @@ let result = [];
 let options = { type: 'upload', max_results: 50, tags: 'true' };
 
 router.get('/', (req, res) => {
-  console.log('HERE IN GET ALL PRODUCTS');
   productController
     .getAllProducts()
     .then(products => {
@@ -32,7 +31,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('HERE IN GET ALL POSTS');
   const productObject = {
     title: req.body.title,
     description: req.body.description,

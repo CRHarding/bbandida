@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'reactstrap';
+import {
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardText,
+} from 'reactstrap';
 
 import EditPost from '../admin/EditPost';
 import ProductCarousel from './ProductCarousel';
@@ -32,31 +40,12 @@ export default class ProductSingle extends Component {
       );
     });
 
-    console.log(this.props.product);
-    
     const product = this.props.product;
     product.images.push(product.mainImages[0]);
     return (
       <Row>
-        <Col xs="auto">
-          <p>
-            {product.title}
-          </p>
-          <p>
-            {product.description}
-          </p>
-          {contributors.map(contributor => {
-            return (
-              <p>
-                contributor: {contributor[0].name}
-                <br />
-                role: {contributor[0].role}
-                <br />
-                link: {contributor[0].link}
-              </p>
-            );
-          })}
-          <ProductCarousel images={product.images}/>
+        <Col xs="12" md="8">
+          <ProductCarousel images={product.images} />
           {/* <Button color="primary" onClick={this.showEdit}>
             Edit
           </Button> */}
@@ -69,6 +58,23 @@ export default class ProductSingle extends Component {
           ) : (
             ''
           )}
+        </Col>
+        <Col xs="12" md="4">
+          <Card>
+            <CardHeader tag="h3">{product.title}</CardHeader>
+            <CardBody>
+              <CardTitle tag="h5">{product.description}</CardTitle>
+              {contributors.map((contributor, key) => {
+                return (
+                  <CardText key={key} tag="p">
+                    Name: {contributor[0].name}<br/>
+                    Role: {contributor[0].role}<br/>
+                    Link: <a href={contributor[0].link} target="blank">{contributor[0].link}</a><br/>
+                  </CardText>
+                );
+              })}
+            </CardBody>
+          </Card>
         </Col>
       </Row>
     );

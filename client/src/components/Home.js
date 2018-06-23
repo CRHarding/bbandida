@@ -19,7 +19,7 @@ export default class home extends Component {
     return (
       <CloudinaryContext cloudName="bbandida">
         <Header />
-        <Container align="center" center>
+        <Container>
           <h1>BB and IDA</h1>
           {this.state.data ? (
             <Products
