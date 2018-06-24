@@ -68,3 +68,7 @@ body {
 .carousel-control-prev,.carousel-control-next {
   cursor:pointer;
 }
+
+#CompanyName {
+  font-family: 'Felipa', cursive;
+}
