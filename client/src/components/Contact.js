@@ -74,6 +74,7 @@ export default class Contact extends Component {
                 onChange={this.handleChange}
               />
               <Form.Input
+                type="textarea"
                 label="Message"
                 name="message"
                 onChange={this.handleChange}

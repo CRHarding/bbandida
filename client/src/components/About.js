@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './static/Header';
-import { Container } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 const About = () => {
   return (
@@ -9,7 +9,17 @@ const About = () => {
       <br/>
       <br/>
       <Container align="center">
-        <h1 className="about">About</h1>
+        <Row>
+          <Col xs="6">
+            <h1 className="about">About</h1>
+          </Col>
+          <Col xs="6">
+            <h1>Info</h1>
+            <p>Jessica Duhig</p>
+            <p>Berwyn, IL (1 min outside of Chicago)</p>
+            <p>designer@bbandida.com</p>
+          </Col>
+        </Row>
         <div className="aboutme">
           <img className="jessImg"
                src="https://static1.squarespace.com/static/5912bcf8d482e9800e805be2/t/5b0c53bd575d1fdde9ab6506/1527534661293/IMGP1563-lr-39.jpg?format=1500w" 
