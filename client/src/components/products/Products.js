@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row } from 'reactstrap';
+import { Container, Col, Row, Progress } from 'reactstrap';
 
 import Product from './Product';
 import ProductSingle from './ProductSingle';
@@ -58,15 +58,20 @@ export default class Products extends Component {
   render() {
     return (
       <Container>
-        {this.state.click ? (
-          <ProductSingle
-            product={this.state.currentProduct}
-            contributors={this.props.contributors}
-          />
-        ) : (
-          ''
-        )}
         <Row>
+          {this.state.click ? (
+            <Col>
+              <ProductSingle
+                product={this.state.currentProduct}
+                contributors={this.props.contributors}
+              />
+            <hr />
+            </Col>
+          ) : (
+            ''
+          )}
+        </Row>
+        <Row className="justify-content-center">
           {this.showProducts()}
         </Row>
       </Container>

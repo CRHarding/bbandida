@@ -6,33 +6,26 @@ import { Container } from 'reactstrap';
 
 import { CloudinaryContext } from 'cloudinary-react';
 
-export default class home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: this.props.data,
-      contributors: this.props.contributors,
-    };
-  }
+const home = props => {
+  return (
+    <CloudinaryContext cloudName="bbandida">
+      <Header />
+      <Container>
+        <h1 id="CompanyName">BB and IDA</h1>
+        {props.data ? (
+          <Products
+            products={props.data}
+            contributors={props.contributors}
+          />
+        ) : (
+          <Dimmer active inverted>
+            <Loader inverted content="Loading" />
+          </Dimmer>
+        )}
+      </Container>
+    </CloudinaryContext>
+  );
+};
 
-  render() {
-    return (
-      <CloudinaryContext cloudName="bbandida">
-        <Header />
-        <Container align="center" center>
-          <h1>BB and IDA</h1>
-          {this.state.data ? (
-            <Products
-              products={this.state.data}
-              contributors={this.state.contributors}
-            />
-          ) : (
-            <Dimmer active inverted>
-              <Loader inverted content='Loading' />
-            </Dimmer>
-          )}
-        </Container>
-      </CloudinaryContext>
-    );
-  }
-}
+
+export default home;

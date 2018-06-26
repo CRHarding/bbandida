@@ -19,8 +19,9 @@ export default class Product extends Component {
   render() {
     if (this.state.product.mainImages) {
       return (
-        <Col xs="auto">
+        <Col xs="12" md="6">
           <Image
+            responsive
             className="ResponsiveMainImages"
             publicId={this.state.product.mainImages[0]}
             onClick={() => this.handleClick(this.state.product)}
