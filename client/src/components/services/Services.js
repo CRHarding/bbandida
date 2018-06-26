@@ -8,14 +8,14 @@ const Services = {
   getProducts() {
     return axios({
       method: 'GET',
-      url: 'http://bbandida.surge.sh/api/products'
+      url: 'https://bbandida.surge.sh/api/products'
     });
   },
 
   addProducts(product) {
     return axios({
       method: 'POST',
-      url: 'http://bbandida.surge.sh/api/products',
+      url: 'https://bbandida.surge.sh/api/products',
       data: product
     });
   },
@@ -24,7 +24,7 @@ const Services = {
     console.log('This is services for editProduct', product)
     return axios({
       method: 'PUT',
-      url: 'http://bbandida.surge.sh/api/products/edit',
+      url: 'https://bbandida.surge.sh/api/products/edit',
       data: product
     })
   },
@@ -34,7 +34,7 @@ const Services = {
   getContribs() {
     return axios({
       method: 'GET',
-      url: 'http://bbandida.surge.sh/api/contributors',
+      url: 'https://bbandida.surge.sh/api/contributors',
     });
   },
 
@@ -51,7 +51,7 @@ const Services = {
   contactSubmit(contact) {
     return axios({
       method: 'POST',
-      url: 'http://bbandida.surge.sh/api/send',
+      url: 'https://bbandida.surge.sh/api/send',
       data: contact
     })
   }
