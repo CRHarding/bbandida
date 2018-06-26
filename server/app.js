@@ -17,20 +17,20 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api/products', productsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/contributors', contributorRouter);
 app.use('/api/send', contactRouter);
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.get('/*', (req, res) => {
-  res.json('MADE IT!');
-});
+// app.get('/*', (req, res) => {
+//   res.json('MADE IT!');
+// });
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
