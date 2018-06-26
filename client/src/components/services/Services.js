@@ -8,7 +8,7 @@ const Services = {
   getProducts() {
     return axios({
       method: 'GET',
-      url: 'bbandida.surge.sh/api/products'
+      url: 'https://bbandida.surge.sh/api/products'
     });
   },
 
