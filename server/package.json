@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
     "debug": "nodemon --inspect",
-    "build": "cd ../client && npm install --only=dev && npm install && npm run deploy"
+    "build": "cd ../client && npm install --only=dev && npm install && npm run deploy",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "debug": "~2.6.9",
     "dotenv": "^5.0.1",
     "express": "~4.16.0",
+    "gh-pages": "^1.2.0",
     "morgan": "~1.9.0",
     "nodemailer": "^4.6.4",
     "nodemon": "^1.17.3",
@@ -33,5 +36,5 @@
     "pg-promise": "^8.4.0",
     "react-image-resizer": "^1.3.0"
   },
-  "homepage": "https://github.com/CRHarding/bbandida#readme"
+  "homepage": "https://github.com/CRHarding.github.io/bbandida"
 }
