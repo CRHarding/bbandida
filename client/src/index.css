@@ -44,6 +44,10 @@ body {
   padding: 100px;
 }
 
+.bio {
+  margin-top: 10px;
+}
+
 @media screen and (orientation: portrait) {
   .carousel-item:empty { max-width: 90%; }
 }
