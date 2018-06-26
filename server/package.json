@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
     "debug": "nodemon --inspect",
-    "build": "cd ../client && npm install --only=dev && npm install && npm run build"
+    "build": "cd ../client && npm install --only=dev && npm install && npm run deploy"
   },
   "repository": {
     "type": "git",
