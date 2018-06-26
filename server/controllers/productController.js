@@ -6,19 +6,6 @@ module.exports = {
     return products.getAllProducts();
   },
 
-  //POSSIBLY NOT NEEDED//
-  getOneProduct(id) {
-    products
-      .getOneProduct(product)
-      .then(responseProduct => {
-        return responseProduct;
-      })
-      .catch(err => {
-        return err;
-      });
-  },
-  //POSSIBLY NOT NEEDED//
-
   addProduct(product) {
     return products.addProduct(product);
   },
@@ -29,6 +16,6 @@ module.exports = {
 
   deleteProduct(product) {
     console.log(product);
-    return  products.deleteProduct(product);
+    return products.deleteProduct(product);
   },
 };

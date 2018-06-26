@@ -19,7 +19,7 @@ export default class Product extends Component {
   render() {
     if (this.state.product.mainImages) {
       return (
-        <Col xs="6">
+        <Col xs="12" md="6">
           <Image
             responsive
             className="ResponsiveMainImages"

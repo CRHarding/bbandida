@@ -63,10 +63,10 @@ export default class ProductSingle extends Component {
           <Card>
             <CardHeader tag="h3">{product.title}</CardHeader>
             <CardBody>
-              <CardTitle tag="h5">{product.description}</CardTitle>
+              <CardTitle tag="h5" className="cardText">{product.description}</CardTitle>
               {contributors.map((contributor, key) => {
                 return (
-                  <CardText key={key} tag="p">
+                  <CardText key={key} tag="p" className="cardText">
                     Name: {contributor[0].name}<br/>
                     Role: {contributor[0].role}<br/>
                     Link: <a href={contributor[0].link} target="blank">{contributor[0].link}</a><br/>

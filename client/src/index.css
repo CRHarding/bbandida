@@ -15,7 +15,8 @@ body {
     font-weight: normal;
     line-height: 1em;
     padding: 10px;*/
-    font-family: "proxima-nova";
+    /* font-family: "proxima-nova"; */
+    font-family: 'Indie Flower', cursive;
     font-size: 16px;
     line-height: 2em;
     text-transform: uppercase;
@@ -39,8 +40,8 @@ body {
 }
 
 .aboutme {
-    padding: 100px;
-
+  font-family: 'Indie Flower', cursive;
+  padding: 100px;
 }
 
 @media screen and (orientation: portrait) {
@@ -63,6 +64,7 @@ body {
   height: 350px;
   width: 350px;
   max-height: 100vh;
+  box-shadow: 5px 5px 5px 1px grey;
 }
 
 .carousel-control-prev,.carousel-control-next {
@@ -71,4 +73,9 @@ body {
 
 #CompanyName {
   font-family: 'Felipa', cursive;
+}
+
+
+.cardText {
+  font-family: 'Indie Flower', cursive;
 }
