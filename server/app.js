@@ -17,7 +17,8 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('client/build'));
+
 
 app.use('/api/products', productsRouter);
 app.use('/api/users', usersRouter);
