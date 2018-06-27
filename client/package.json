@@ -2,10 +2,12 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://CRHarding.github.io/bbandida",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "cloudinary-react": "^1.0.6",
+    "gh-pages": "^1.2.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-image-resizer": "^1.3.0",
@@ -21,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build && mv build/index.html build/200.html && surge build bbandida.surge.sh",
+    "deploy": "gh-pages -d build"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "https://bbandida.surge.sh"
 }
