@@ -24,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && mv build/index.html build/200.html && surge build bbandida.surge.sh",
     "deploy": "gh-pages -d build"
-  }
+  },
+  "proxy": "https://bbandida.surge.sh"
 }
