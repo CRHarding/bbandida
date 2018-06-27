@@ -52,9 +52,9 @@ export default class Header extends Component {
             </ul>
         </div>
       </Navbar>*/
-      <Navbar color="light" light expand="md" fixed="top">
-        <NavbarBrand href="/" className="mx-auto">
-          <img src={logo} height="96" width="100" alt="logo" />
+      <Navbar color="white" light expand="md" fixed="top">
+        <NavbarBrand className="mx-auto">
+          <Link to="/"><img src={logo} height="96" width="100" alt="logo" /></Link>
         </NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>

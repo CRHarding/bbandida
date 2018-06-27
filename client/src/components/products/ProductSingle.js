@@ -43,6 +43,7 @@ export default class ProductSingle extends Component {
     const product = this.props.product;
     product.images.push(product.mainImages[0]);
     return (
+      <div className="transitionTest">
       <Row>
         <Col xs="12" md="8">
           <ProductCarousel images={product.images} />
@@ -77,6 +78,7 @@ export default class ProductSingle extends Component {
           </Card>
         </Col>
       </Row>
+      </div>
     );
   }
 }

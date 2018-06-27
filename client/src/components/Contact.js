@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './static/Header';
-import { Form, Container, Message } from 'semantic-ui-react';
+// import { Message } from 'semantic-ui-react';
+import { Container, Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 import Services from './services/Services';
 
 export default class Contact extends Component {
@@ -50,36 +51,70 @@ export default class Contact extends Component {
           <h1 className="contact">Contact</h1>
           <br/>
           {this.state.sent ? (
-            <Message
-              success
-              header="Form Sent"
-              content="Reply will be sent in a timely manner, Thank You"
-            />
+            <Alert color="success">
+              This is a success alert — check it out!
+            </Alert>
+            // <Message
+            //   success
+            //   header="Form Sent"
+            //   content="Reply will be sent in a timely manner, Thank You"
+            // />
           ) : (
-            <Form onSubmit={this.emailSubmit} success>
-              <Form.Input
-                label="Name"
-                name="Name"
-                onChange={this.handleChange}
-              />
-              <Form.Input
-                type="email"
-                label="Email"
-                name="email"
-                onChange={this.handleChange}
-              />
-              <Form.Input
-                label="Subject"
-                name="subject"
-                onChange={this.handleChange}
-              />
-              <Form.Input
-                label="Message"
-                name="message"
-                onChange={this.handleChange}
-              />
-              <Form.Button primary>Send</Form.Button>
+            <Form onSubmit={this.emailSubmit}>
+              <FormGroup>
+                <Label for="name">Name</Label>
+                <Input name="name"
+                       onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="email">Email</Label>
+                <Input name="email"
+                       type="email"
+                       onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="subject">Subject</Label>
+                <Input name="subject"
+                       onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="text">Message</Label>
+                <Input name="message"
+                       type="textarea"
+                       onChange={this.handleChange}
+                />
+              </FormGroup>
+              <Button color="primary">Submit</Button>
             </Form>
+
+            // <Form onSubmit={this.emailSubmit} success>
+            //   <Form.Input
+            //     label="Name"
+            //     name="name"
+            //     onChange={this.handleChange}
+            //   />
+            //   <Form.Input
+            //     type="email"
+            //     label="Email"
+            //     name="email"
+            //     onChange={this.handleChange}
+            //   />
+            //   <Form.Input
+            //     label="Subject"
+            //     name="subject"
+            //     onChange={this.handleChange}
+            //   />
+            //   <Form.Input
+            //     type="textarea"
+            //     label="Message"
+            //     name="message"
+            //     onChange={this.handleChange}
+            //   />
+            //   <Form.Button primary>Send</Form.Button>
+            // </Form>
           )}
         </Container>
       </div>

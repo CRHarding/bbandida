@@ -44,6 +44,10 @@ body {
   padding: 100px;
 }
 
+.bio {
+  margin-top: 10px;
+}
+
 @media screen and (orientation: portrait) {
   .carousel-item:empty { max-width: 90%; }
 }
@@ -75,7 +79,14 @@ body {
   font-family: 'Felipa', cursive;
 }
 
-
 .cardText {
   font-family: 'Indie Flower', cursive;
+}
+
+.transitionTest {
+  opacity: .5;
+}
+.transitionTest:hover {
+  transition: opacity 1 ease;
+ 
 }

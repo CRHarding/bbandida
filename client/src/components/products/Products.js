@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Progress } from 'reactstrap';
-
 import Product from './Product';
 import ProductSingle from './ProductSingle';
 import smoothscroll from 'smoothscroll-polyfill';
@@ -46,11 +45,11 @@ export default class Products extends Component {
   showProducts() {
     return this.props.products.map(product => {
       return (
-        <Product
-          product={product}
-          key={product.id}
-          handleClick={() => this.onClick(product)}
-        />
+          <Product
+            product={product}
+            key={product.id}
+            handleClick={() => this.onClick(product)}
+          />
       );
     });
   }
