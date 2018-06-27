@@ -79,7 +79,14 @@ body {
   font-family: 'Felipa', cursive;
 }
 
-
 .cardText {
   font-family: 'Indie Flower', cursive;
+}
+
+.transitionTest {
+  opacity: .5;
+}
+.transitionTest:hover {
+  transition: opacity 1 ease;
+ 
 }

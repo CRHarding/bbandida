@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './static/Header';
-import { Message } from 'semantic-ui-react';
-import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+// import { Message } from 'semantic-ui-react';
+import { Container, Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 import Services from './services/Services';
 
 export default class Contact extends Component {
@@ -51,11 +51,14 @@ export default class Contact extends Component {
           <h1 className="contact">Contact</h1>
           <br/>
           {this.state.sent ? (
-            <Message
-              success
-              header="Form Sent"
-              content="Reply will be sent in a timely manner, Thank You"
-            />
+            <Alert color="success">
+              This is a success alert — check it out!
+            </Alert>
+            // <Message
+            //   success
+            //   header="Form Sent"
+            //   content="Reply will be sent in a timely manner, Thank You"
+            // />
           ) : (
             <Form onSubmit={this.emailSubmit}>
               <FormGroup>

@@ -26,7 +26,7 @@ const About = () => {
         <div className="aboutme">
           <img className="jessImg img-fluid"
                src="https://static1.squarespace.com/static/5912bcf8d482e9800e805be2/t/5b0c53bd575d1fdde9ab6506/1527534661293/IMGP1563-lr-39.jpg?format=1500w" 
-               width={300}
+               width={400}
           />
           <div className="bio">
             <p>
